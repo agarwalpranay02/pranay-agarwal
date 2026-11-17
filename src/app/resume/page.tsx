@@ -64,9 +64,11 @@ export default function ResumePage() {
 
         <Block title="Experience">
           {r.experience.map((e) => (
-            <div key={e.sub} className="cv-item">
+            <div key={e.title} className="cv-item">
               <div className="cv-row"><p><strong>{e.title}</strong></p><p>{e.right}</p></div>
-              <div className="cv-row cv-sub"><p>{e.sub}</p><p>{e.subRight}</p></div>
+              {e.roles?.map((role) => (
+                <div key={role.title} className="cv-row cv-sub"><p>{role.title}</p><p>{role.dates}</p></div>
+              ))}
               <ul className="cv-list">{e.bullets?.map((b) => <li key={b}><Rich text={b} /></li>)}</ul>
             </div>
           ))}

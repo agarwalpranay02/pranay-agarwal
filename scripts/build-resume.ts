@@ -57,6 +57,10 @@ out(String.raw`%-------------------------
 \usepackage{tabularx}
 % ATS: no f-ligatures, so "certified" is extracted as text, not as an unmapped glyph
 \usepackage{microtype}
+\usepackage{fontawesome5}
+\usepackage{accsupp}
+% icons are decorative: give them empty text so ATS parsers and copy-paste skip them
+\newcommand{\icon}[1]{\BeginAccSupp{ActualText={}}\raisebox{-0.1\height}{#1}\EndAccSupp{}\,}
 \DisableLigatures[f]{encoding = *, family = *}
 \usepackage{xurl}
 \input{glyphtounicode}
@@ -120,7 +124,10 @@ out(String.raw`%-------------------------
 
 out(`\\begin{center}`);
 out(`    {\\Huge \\scshape ${esc(RESUME.name)}} \\\\ \\vspace{2pt}`);
-out(`    \\small ${RESUME.contacts.map((c) => href(c.url, c.label)).join(" $|$ ")}`);
+const ICON: Record<string, string> = {
+  phone: "\\faPhone*", email: "\\faEnvelope", web: "\\faGlobe", linkedin: "\\faLinkedin", github: "\\faGithub", orcid: "\\faOrcid",
+};
+out(`    \\small ${RESUME.contacts.map((c) => `${c.icon ? `\\icon{${ICON[c.icon]}}` : ""}${href(c.url, c.label)}`).join(" \\quad ")}`);
 out(`\\end{center}`);
 out();
 
@@ -128,7 +135,14 @@ const subheadings = (title: string, entries: typeof RESUME.education | typeof RE
   out(`\\section{${title}}`);
   out(`  \\resumeSubHeadingListStart`);
   for (const e of entries) {
-    if (e.compact) out(`    \\resumeProjectHeading{\\textbf{${tex(e.title)}} $|$ \\emph{${tex(e.sub)}}}{${tex(e.right)}}`);
+    if (e.roles?.length) {
+      // one table, like \\resumeSubheading, so the spacing matches the template
+      out(`    \\vspace{-2pt}\\item`);
+      out(`      \\begin{tabular*}{0.97\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}`);
+      out(`        \\textbf{${tex(e.title)}} & ${tex(e.right)} \\\\`);
+      for (const r of e.roles) out(`        \\textit{\\small ${tex(r.title)}} & \\textit{\\small ${tex(r.dates)}} \\\\`);
+      out(`      \\end{tabular*}\\vspace{-7pt}`);
+    } else if (e.compact) out(`    \\resumeProjectHeading{\\textbf{${tex(e.title)}} $|$ \\emph{${tex(e.sub)}}}{${tex(e.right)}}`);
     else if (e.sub) out(`    \\resumeSubheading{${tex(e.title)}}{${tex(e.right)}}{${tex(e.sub)}}{${tex(e.subRight)}}`);
     else out(`    \\resumeOneLine{${tex(e.title)}}{${tex(e.right)}}`);
     if (e.bullets?.length) {

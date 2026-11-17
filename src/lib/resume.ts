@@ -9,20 +9,25 @@
  */
 import { PERSON, SITE } from "./content";
 
-export type Link = { label: string; url: string };
-export type Entry = { title: string; right: string; sub: string; subRight: string; current?: boolean; compact?: boolean; bullets?: string[] };
+export type Link = { label: string; url: string; icon?: "phone" | "email" | "web" | "linkedin" | "github" | "orcid" };
+export type Role = { title: string; dates: string };
+export type Entry = {
+  title: string; right: string; sub: string; subRight: string;
+  /** positions held at one employer, newest first; each gets its own line with its dates */
+  roles?: Role[];
+  current?: boolean; compact?: boolean; bullets?: string[];
+};
 export type Project = { name: string; tech: string; links: Link[]; bullets: string[] };
-
-const site = SITE.url.replace(/^https?:\/\//, "");
 
 export const RESUME = {
   name: PERSON.name,
   contacts: [
-    { label: PERSON.email, url: `mailto:${PERSON.email}` },
-    { label: site, url: SITE.url },
-    { label: "LinkedIn", url: PERSON.links.linkedin },
-    { label: "Google Scholar", url: PERSON.links.scholar },
-    { label: `ORCID ${PERSON.orcidId}`, url: PERSON.links.orcid },
+    { label: "+91 9351609343", url: "tel:+919351609343", icon: "phone" },
+    { label: PERSON.email, url: `mailto:${PERSON.email}`, icon: "email" },
+    { label: "Portfolio", url: SITE.url, icon: "web" },
+    { label: "LinkedIn", url: PERSON.links.linkedin, icon: "linkedin" },
+    { label: "GitHub", url: "https://github.com/agarwalpranay02", icon: "github" },
+    { label: "ORCID", url: PERSON.links.orcid, icon: "orcid" },
   ] as Link[],
 
   education: [
@@ -51,9 +56,13 @@ export const RESUME = {
   experience: [
     {
       title: "MaxBrain Technologies",
-      right: "Jul 2025 – Present",
-      sub: "AI/ML Engineer (Jan 2026 – Present); AI/ML Research Intern (Jul 2025 – Dec 2025)",
-      subRight: "Jaipur, India",
+      right: "Jaipur, India",
+      sub: "",
+      subRight: "",
+      roles: [
+        { title: "AI/ML Engineer", dates: "Jan 2026 – Present" },
+        { title: "AI/ML Research Intern", dates: "Jul 2025 – Dec 2025" },
+      ],
       current: true,
       bullets: [
         "Ran a **bibliometric review of 1,081 papers (2014–2024)** on deep learning for plant disease detection with **Lens.org, Scopus and VOSviewer**; published in [Springer Nature's Discover AI](https://doi.org/10.1007/s44163-026-02310-z).",
@@ -66,9 +75,10 @@ export const RESUME = {
     },
     {
       title: "Starlight Data Solutions",
-      right: "May 2025 – Jul 2025",
-      sub: "Software Engineering Intern",
-      subRight: "Noida, India",
+      right: "Noida, India",
+      sub: "",
+      subRight: "",
+      roles: [{ title: "Software Engineering Intern", dates: "May 2025 – Jul 2025" }],
       bullets: [
         "Contributed to an **automated firmware management system** tracking releases across OEM vendor websites.",
         "Worked on its **Python scraping engine** (Selenium, BeautifulSoup), **Flask** API, **MongoDB** and **Elasticsearch**.",
