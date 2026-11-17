@@ -24,7 +24,7 @@ export const PERSON = {
 } as const;
 
 export const SITE = {
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://pranayagarwal.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://pranay-agarwal.vercel.app",
   title: "Pranay Agarwal · AI/ML Engineer",
   description:
     "Pranay Agarwal builds computer vision and on-device ML systems: two shipped AI products, Springer publications, public datasets and a registered design.",

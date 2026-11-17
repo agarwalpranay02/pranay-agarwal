@@ -1,0 +1,155 @@
+%-------------------------
+% Résumé of Pranay Agarwal. Generated from src/lib/resume.ts by scripts/build-resume.ts.
+% Layout: Jake Gutierrez's resume template (https://github.com/jakegut/resume), MIT licence.
+% Opens directly in Overleaf: New Project > Upload Project > this .tex file.
+%-------------------------
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage[T1]{fontenc}
+\usepackage{xurl}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% A4 page, tight margins
+\usepackage[a4paper,top=0.45in,bottom=0.4in,left=0.5in,right=0.5in]{geometry}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section formatting
+\titleformat{\section}{
+  \vspace{-1pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{\item\fontsize{9.5}{11.6}\selectfont{{#1 \vspace{-2pt}}}}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-6pt}
+}
+
+\newcommand{\resumeOneLine}[2]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+    \end{tabular*}\vspace{-6pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-6pt}
+}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-4pt}}
+
+%-------------------------------------------
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge \scshape Pranay Agarwal} \\ \vspace{2pt}
+    \small \href{mailto:pranayagarwal2511@gmail.com}{\underline{pranayagarwal2511@gmail.com}} $|$ \href{https://pranay-agarwal.vercel.app}{\underline{pranay-agarwal.vercel.app}} $|$ \href{https://www.linkedin.com/in/pranay-agarwal-83b177295/}{\underline{LinkedIn}} $|$ \href{https://scholar.google.com/citations?hl=en&user=L2xx3fgAAAAJ}{\underline{Google Scholar}} $|$ \href{https://orcid.org/0009-0009-6879-4074}{\underline{ORCID 0009-0009-6879-4074}}
+\end{center}
+
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading{Birla Institute of Technology, Mesra}{Jaipur Campus, India}{Bachelor of Technology in Computer Science; CGPA: 8.37/10, First Class with Distinction}{2022 -- 2026}
+    \resumeOneLine{IELTS Academic: Overall Band 7.5 (CEFR C1)}{May 2026}
+  \resumeSubHeadingListEnd
+
+\section{Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading{AI/ML Engineer}{Jul 2025 -- Present}{MaxBrain Technologies (joined as AI/ML Research Intern)}{Jaipur, India}
+      \resumeItemListStart
+        \resumeItem{Built two public field datasets of leaf images with farmers near Jaipur: \textbf{ridge gourd (9,000 images, IEEE DataPort)} and \textbf{brinjal (13,600, Mendeley Data)}.}
+        \resumeItem{Designed a \textbf{DenseNet121 + XGBoost} hybrid reaching \textbf{92.0\%} on ridge gourd disease; \textbf{first-author} Springer paper (MIND 2025).}
+        \resumeItem{Co-designed an \textbf{IoT device} for plant-sample collection; \textbf{design registered with Govt. of India} (476293-001).}
+        \resumeItem{Built \textbf{Fasal Saathi} with a teammate, a one-photo leaf diagnosis app \textbf{published on Google Play} by MaxBrain.}
+      \resumeItemListEnd
+    \resumeSubheading{Software Engineering Intern}{May 2025 -- Jul 2025}{Starlight Data Solutions}{Noida, India}
+      \resumeItemListStart
+        \resumeItem{Contributed to an \textbf{automated firmware management system} tracking releases across OEM vendor websites.}
+        \resumeItem{Worked with its \textbf{Python scraping engine}, \textbf{Flask} backend, \textbf{MongoDB} storage and \textbf{Elasticsearch} search.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+\section{Projects}
+  \resumeSubHeadingListStart
+    \resumeProjectHeading{\textbf{LeafCheckup} $|$ \emph{PyTorch, ONNX Runtime Web, WebAssembly, Next.js, FastAPI}}{\href{https://leafcheckup.vercel.app}{\underline{leafcheckup.vercel.app}}}
+      \resumeItemListStart
+        \resumeItem{Trained \textbf{EfficientNet-B0}: \textbf{94.9\% on 217 unseen leaves} (leak-free split); \textbf{98.9\% vs 92.0\%} over the paper baseline.}
+        \resumeItem{Runs \textbf{fully in the browser} (ONNX Runtime Web, WebAssembly, WebGPU) at \textbf{$\sim$120 ms/photo}; offline-ready PWA.}
+        \resumeItem{\textbf{Out-of-distribution detector (0.993 AUROC)}, calibrated confidence (\textbf{ECE 1.8\%}), heatmaps, developer \textbf{API}.}
+      \resumeItemListEnd
+    \resumeProjectHeading{\textbf{TinyMotion} $|$ \emph{TensorFlow, TFLite Micro, C99, TypeScript, Next.js}}{\href{https://tinymotion.vercel.app}{\underline{tinymotion.vercel.app}}}
+      \resumeItemListStart
+        \resumeItem{\textbf{35,558-parameter} residual 1D CNN: \textbf{93.4 $\pm$ 1.1\%} on 9 unseen people (UCI HAR, 5 seeds), live in the browser.}
+        \resumeItem{\textbf{Rotation augmentation} keeps \textbf{92.8\%} with the phone at any angle, where the paper's model falls to 80.3\%.}
+        \resumeItem{Exported to \textbf{INT8 TFLite (85.7 KB)}, TFLite Micro and a dependency-free \textbf{C99 header}, all verified against Keras.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+\section{Research \& Publications}
+  \resumeSubHeadingListStart
+    \item \begin{itemize}[leftmargin=0.15in]
+      \resumeItem{\href{https://link.springer.com/chapter/10.1007/978-3-032-31233-4_7}{\textbf{P. Agarwal}, P. Sharma, V. Sharma. \textit{A Hybrid Deep Learning Approach for Automated Plant Disease Diagnosis in Indian Ridge Gourd: Dataset Creation and Real-World Application.} MIND 2025, Springer CCIS, 2026. (First author)}}
+      \resumeItem{\href{https://doi.org/10.1007/s44163-026-02310-z}{P. Sharma, \textbf{P. Agarwal}, A. K. Bairwa, V. Sharma. \textit{A comprehensive review and bibliometric analysis of deep learning applications in plant disease detection.} Discover Artificial Intelligence, 2026. (Equal contribution)}}
+      \resumeItem{\href{https://www.scrs.in/conference/wcaiaa2026}{P. Sharma, \textbf{P. Agarwal}, J. Goyal. \textit{TinyML-Based Lightweight Deep Learning Model for Human Activity Recognition on Edge Devices.} WCAIAA 2026, Springer LNNS, to appear.}}
+      \resumeItem{\textbf{Registered Design No. 476293-001}, Government of India (Oct 2025): IoT-based device for real-time data collection and augmentation of plant samples. \href{https://drive.google.com/file/d/1fnbNIrKeal7NGtuPIZunkuAs7jU-0VHw/view?usp=sharing}{\underline{Certificate}}}
+      \resumeItem{\textbf{Public datasets:} \href{https://doi.org/10.21227/469z-vm04}{\underline{Ridge gourd leaf images (9,000), IEEE DataPort}}; \href{https://doi.org/10.17632/c39p3k87g2.2}{\underline{Brinjal leaf images (13,600), Mendeley Data}}.}
+    \end{itemize}\vspace{-4pt}
+  \resumeSubHeadingListEnd
+
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: Python, TypeScript, JavaScript, C, C++, Java, SQL, Bash} \\
+     \textbf{Machine Learning}{: PyTorch, TensorFlow, Keras, scikit-learn, XGBoost, timm, OpenCV, NumPy, pandas} \\
+     \textbf{Edge \& On-Device AI}{: ONNX Runtime Web, TensorFlow Lite (INT8), TFLite Micro, WebAssembly, WebGPU} \\
+     \textbf{Generative AI}{: LangChain, RAG, Vector Search, OpenAI API} \\
+     \textbf{Web \& Data}{: Next.js, React, Node.js, FastAPI, Flask, PostgreSQL, MongoDB, Elasticsearch} \\
+     \textbf{DevOps \& Testing}{: Docker, GitHub Actions, Vercel, Linux, Git, Playwright, pytest}
+    }}
+ \end{itemize}
+
+\section{Achievements \& Certifications}
+  \resumeSubHeadingListStart
+    \item \begin{itemize}[leftmargin=0.15in]
+      \resumeItem{\textbf{Featured Researcher}, Springer Nature India Research Tour 2025; covered by \textbf{Punjab Kesari} and \textbf{IEEE DataPort}.}
+      \resumeItem{\textbf{Paper presenter}, WCAIAA 2026 (7th World Conference on Artificial Intelligence), NFSU Goa.}
+      \resumeItem{\textbf{Oracle Certified Professional}: OCI Data Science, OCI Generative AI, AI Vector Search; OCI AI Foundations Associate.}
+      \resumeItem{\textbf{Coordinator, Sports Committee}, BIT Mesra; senior coordinator of the Cavorts 2023 annual sports tournament.}
+    \end{itemize}\vspace{-4pt}
+  \resumeSubHeadingListEnd
+
+\end{document}

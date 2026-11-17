@@ -6,7 +6,7 @@ Personal site of Pranay Agarwal, AI/ML engineer: two shipped AI products, Spring
 |---|---|
 | `/` | Profile, products, experience, tech stack, research, recognition, education, contact form |
 | `/work` | Case studies of LeafCheckup and TinyMotion: problem, pipeline, decisions, measured results |
-| `/resume` | One-page A4 résumé, printable, with a PDF download |
+| `/resume` | One-page résumé (LaTeX, Jake Gutierrez's template), with PDF and `.tex` downloads |
 
 ## Stack
 
@@ -28,7 +28,7 @@ npm run dev                  # http://localhost:3000
 ```
 
 Tests: `npm run build && npm start`, then `npm run test:e2e` in another shell.
-Résumé PDF: with the production server running, `npm run pdf` writes `public/pranay-agarwal-resume.pdf`.
+Résumé: edit [`src/lib/resume.ts`](src/lib/resume.ts), then `npm run resume` (needs `pdflatex`). It writes the LaTeX source in [Jake Gutierrez's template](https://github.com/jakegut/resume) to `resume/` and compiles the one-page PDF into `public/`. The `.tex` file also opens directly in Overleaf.
 
 ## Licence
 
