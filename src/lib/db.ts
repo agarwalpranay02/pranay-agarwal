@@ -35,8 +35,15 @@ export function ensureSchema(sql: NeonQueryFunction<false, false>): Promise<void
 }
 
 /** One-way hash of the client IP so rate limits work without storing addresses. */
+/**
+ * Visitor IPs are stored only as salted hashes, for rate limiting. The salt must be secret, or a
+ * hashed IPv4 address could be reversed by brute force: use IP_HASH_SALT if set, otherwise derive
+ * one from the (secret) database URL.
+ */
 export function hashIp(ip: string): string {
-  const salt = process.env.IP_HASH_SALT || "portfolio";
+  const salt =
+    process.env.IP_HASH_SALT ||
+    createHash("sha256").update(`ip-salt:${process.env.DATABASE_URL ?? "local"}`).digest("hex");
   return createHash("sha256").update(`${salt}:${ip}`).digest("hex").slice(0, 32);
 }
 
