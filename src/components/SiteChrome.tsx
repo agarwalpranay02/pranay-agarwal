@@ -2,7 +2,6 @@ import Link from "next/link";
 import { PERSON, PRODUCTS } from "@/lib/content";
 import { CommandMenu, SearchButton, type Command } from "./CommandMenu";
 import { ThemeToggle } from "./ThemeToggle";
-import { ViewCount } from "./ViewCount";
 
 const COMMANDS: Command[] = [
   { id: "home", group: "Pages", label: "Home", href: "/", keywords: "overview start" },
@@ -10,8 +9,8 @@ const COMMANDS: Command[] = [
   { id: "resume", group: "Pages", label: "Résumé", href: "/resume", keywords: "cv resume pdf" },
   { id: "s-products", group: "Sections", label: "Products", href: "/#products", keywords: "projects apps" },
   { id: "s-experience", group: "Sections", label: "Experience", href: "/#experience", keywords: "work job maxbrain starlight" },
-  { id: "s-stack", group: "Sections", label: "Tech stack", href: "/#stack", keywords: "skills tools languages" },
   { id: "s-research", group: "Sections", label: "Research", href: "/#research", keywords: "papers publications patent datasets" },
+  { id: "s-stack", group: "Sections", label: "Tech stack", href: "/#stack", keywords: "skills tools languages" },
   { id: "s-recognition", group: "Sections", label: "Recognition and certifications", href: "/#recognition", keywords: "awards oracle springer press" },
   { id: "s-education", group: "Sections", label: "Education", href: "/#education", keywords: "bit mesra degree ielts" },
   { id: "s-contact", group: "Sections", label: "Contact", href: "/#contact", keywords: "message hire email" },
@@ -44,31 +43,16 @@ export function SiteHeader() {
 }
 
 export function SiteFooter() {
-  const sha = process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7);
-  const built = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: PERSON.timezone });
   return (
     <footer className="no-print">
-      <div className="frame rule px-6 py-8 text-[0.875rem] sm:px-10">
-        <div className="grid gap-6 sm:grid-cols-[1.4fr_1fr]">
-          <div>
-            <p className="font-semibold">{PERSON.name}</p>
-            <p className="muted mt-1 max-w-[42ch]">AI/ML engineer in {PERSON.location}..</p>
-            <p className="muted mt-3">
-              <a className="link" href={`mailto:${PERSON.email}`}>{PERSON.email}</a>
-            </p>
-          </div>
-          <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-[0.8125rem]">
-            <dt className="muted">Built with</dt>
-            <dd>Next.js 16, React 19, Tailwind CSS 4</dd>
-            <dt className="muted">Data</dt>
-            <dd>Neon Postgres</dd>
-            <dt className="muted">Hosted on</dt>
-            <dd>Vercel</dd>
-            <dt className="muted">Version</dt>
-            <dd className="mono">{sha ? `${sha} · ${built}` : built}</dd>
-            <ViewCount />
-          </dl>
-        </div>
+      <div className="frame rule flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-7 text-[0.875rem] sm:px-10">
+        <p className="muted">© {new Date().getFullYear()} {PERSON.name}</p>
+        <ul className="flex flex-wrap gap-x-5 gap-y-1">
+          <li><a className="link" href={`mailto:${PERSON.email}`}>Email</a></li>
+          <li><a className="link" href={PERSON.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a className="link" href={PERSON.links.scholar} target="_blank" rel="noopener noreferrer">Google Scholar</a></li>
+          <li><a className="link" href={PERSON.links.orcid} target="_blank" rel="noopener noreferrer">ORCID</a></li>
+        </ul>
       </div>
     </footer>
   );

@@ -201,6 +201,12 @@ export const DATASETS = [
   },
 ];
 
+/** Class X and XII results, from the CBSE marksheets (best five subjects). */
+export const SCHOOLING = [
+  { level: "Class XII, CBSE", school: "Blue Heaven Vidyalaya, Jaipur", score: "92.4%", year: "2022" },
+  { level: "Class X, CBSE", school: "Ryan International School, Jaipur", score: "91.4%", year: "2020" },
+];
+
 export const EDUCATION = {
   school: "Birla Institute of Technology, Mesra",
   degree: "B.Tech, Computer Science",

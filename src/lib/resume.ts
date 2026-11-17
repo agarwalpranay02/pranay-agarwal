@@ -30,6 +30,18 @@ export const RESUME = {
       sub: "Bachelor of Technology in Computer Science; CGPA: 8.37/10, First Class with Distinction",
       subRight: "2022 – 2026",
     },
+    {
+      title: "Blue Heaven Vidyalaya",
+      right: "Jaipur, India",
+      sub: "Senior Secondary (Class XII), CBSE; Physics, Chemistry, Mathematics: 92.4%",
+      subRight: "2022",
+    },
+    {
+      title: "Ryan International School",
+      right: "Jaipur, India",
+      sub: "Secondary (Class X), CBSE: 91.4%",
+      subRight: "2020",
+    },
   ] as Entry[],
 
   experience: [

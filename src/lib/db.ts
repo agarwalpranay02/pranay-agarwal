@@ -26,7 +26,6 @@ export function ensureSchema(sql: NeonQueryFunction<false, false>): Promise<void
       created_at TIMESTAMPTZ NOT NULL DEFAULT now()
     )`;
     await sql`CREATE INDEX IF NOT EXISTS messages_ip_time ON messages (ip_hash, created_at DESC)`;
-    await sql`CREATE TABLE IF NOT EXISTS page_views (slug TEXT PRIMARY KEY, count BIGINT NOT NULL DEFAULT 0)`;
   })().catch((e) => {
     ready = null;
     throw e;

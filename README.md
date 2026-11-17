@@ -11,7 +11,7 @@ Personal site of Pranay Agarwal, AI/ML engineer: two shipped AI products, Spring
 ## Stack
 
 - **Framework:** Next.js 16 (App Router, statically generated pages), React 19, TypeScript, Tailwind CSS 4
-- **Data:** Neon serverless Postgres over HTTP for contact messages and the visit counter; Zod validation
+- **Data:** Neon serverless Postgres over HTTP for contact messages; Zod validation
 - **Features:** ⌘K command menu, light and dark themes with no flash, Open Graph image and icons generated with `next/og`, JSON-LD for search engines, print stylesheet
 - **Security:** Content-Security-Policy, HSTS, `frame-ancestors 'none'`, Permissions-Policy; contact form with a honeypot, size caps and per-IP rate limits (IPs are stored only as salted hashes)
 - **Quality:** Playwright tests on desktop and phone (page health, overflow, images, links, keyboard menu, theme, API validation, headers); CodeQL, gitleaks, npm audit and Dependabot

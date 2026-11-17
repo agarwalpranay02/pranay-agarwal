@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
+import { DetectLabel } from "@/components/DetectLabel";
 import { ArrowUpRight, DocIcon, LinkedInIcon, MailIcon, OrcidIcon, PinIcon, ScholarIcon } from "@/components/Icons";
 import {
-  BEYOND, CERTIFICATIONS, DATASETS, DESIGN_REGISTRATION, EDUCATION, EXPERIENCE, PAPERS, PERSON, PRODUCTS, RECOGNITION,
+  BEYOND, CERTIFICATIONS, DATASETS, DESIGN_REGISTRATION, EDUCATION, EXPERIENCE, PAPERS, PERSON, PRODUCTS, RECOGNITION, SCHOOLING,
 } from "@/lib/content";
-import { STACK, TOOL_COUNT } from "@/lib/stack";
+import { STACK } from "@/lib/stack";
 
 function Section({ id, title, aside, children }: { id: string; title: string; aside?: React.ReactNode; children: React.ReactNode }) {
   return (
@@ -39,7 +40,7 @@ function Hero() {
             className="size-[132px] rounded-[3px] object-cover"
           />
           <span className="detect-frame" aria-hidden />
-          <span className="detect-label" aria-hidden>ml_engineer 0.99</span>
+          <DetectLabel />
         </div>
         <div>
           <h1 className="text-[2.6rem] leading-[1.02] font-[720] tracking-[-0.035em] sm:text-[3.25rem]">{PERSON.name}</h1>
@@ -53,7 +54,7 @@ function Hero() {
         </div>
       </div>
       <p className="lead mt-8 max-w-[62ch]">
-        {PERSON.summary} Two of those systems are live products, three papers came out of the research, and the field device I co-designed is a registered design with the Government of India.
+        {PERSON.summary} Two of them are live products. The research behind them is published by Springer, and the field device I co-designed is a registered design with the Government of India.
       </p>
       <div className="no-print mt-7 flex flex-wrap gap-2.5">
         <a className="btn btn-primary" href={`mailto:${PERSON.email}`}><MailIcon /> Email me</a>
@@ -62,28 +63,6 @@ function Hero() {
         <a className="btn" href={PERSON.links.scholar} target="_blank" rel="noopener noreferrer"><ScholarIcon /> Scholar</a>
         <a className="btn" href={PERSON.links.orcid} target="_blank" rel="noopener noreferrer"><OrcidIcon /> ORCID</a>
       </div>
-    </section>
-  );
-}
-
-function Highlights() {
-  const items = [
-    ["2", "AI products live, used from any phone"],
-    ["3", "Springer papers, 2 published and 1 to appear"],
-    ["22,600", "field images across 2 public datasets"],
-    ["1", "registered design, Government of India"],
-  ];
-  return (
-    <section aria-label="Highlights" className="frame rule">
-      <dl className="grid grid-cols-2 sm:grid-cols-4">
-        {items.map(([v, l], i) => (
-          <div key={l} className={`px-6 py-5 sm:px-5 ${i % 2 ? "border-l" : ""} ${i > 1 ? "border-t sm:border-t-0" : ""} ${i === 2 ? "sm:border-l" : ""}`}>
-            <dt className="sr-only">{l}</dt>
-            <dd className="text-[1.5rem] leading-none font-[680] tracking-[-0.02em]">{v}</dd>
-            <dd className="muted mt-2 text-[0.8125rem] leading-snug">{l}</dd>
-          </div>
-        ))}
-      </dl>
     </section>
   );
 }
@@ -146,7 +125,6 @@ function Experience() {
             <ul className="ink-2 mt-3 grid list-disc gap-1.5 pl-5 text-[0.9375rem] marker:text-[var(--line-strong)]">
               {r.points.map((pt) => <li key={pt}>{pt}</li>)}
             </ul>
-            <ul className="mt-3 flex flex-wrap gap-1.5">{r.tags.map((t) => <li key={t} className="chip">{t}</li>)}</ul>
           </li>
         ))}
       </ol>
@@ -156,14 +134,11 @@ function Experience() {
 
 function Stack() {
   return (
-    <Section id="stack" title="Tech stack" aside={`${TOOL_COUNT} tools across products, research and certifications`}>
+    <Section id="stack" title="Tech stack">
       <div className="grid gap-7">
         {STACK.map((g) => (
           <div key={g.name} className="grid gap-x-6 gap-y-2.5 sm:grid-cols-[176px_1fr]">
-            <div>
-              <h3 className="text-[0.9375rem] font-[650]">{g.name}</h3>
-              {g.blurb && <p className="muted mt-0.5 text-[0.8125rem] leading-snug">{g.blurb}</p>}
-            </div>
+            <h3 className="pt-1 text-[0.9375rem] font-[650]">{g.name}</h3>
             <ul className="flex flex-wrap content-start gap-1.5">
               {g.tools.map((t) => (
                 <li key={t.name} className="chip">
@@ -311,6 +286,14 @@ function Education() {
           </div>
           <span className="muted text-[0.875rem]">{EDUCATION.period}</span>
         </div>
+        {SCHOOLING.map((s) => (
+          <div key={s.level} className="flex flex-wrap items-baseline justify-between gap-x-4">
+            <p className="text-[0.9375rem]">
+              <span className="font-medium">{s.level}: {s.score}</span> <span className="muted">{s.school}</span>
+            </p>
+            <span className="muted text-[0.875rem]">{s.year}</span>
+          </div>
+        ))}
       </div>
     </Section>
   );
@@ -344,11 +327,10 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Highlights />
       <Products />
       <Experience />
-      <Stack />
       <Research />
+      <Stack />
       <Recognition />
       <Education />
       <Beyond />

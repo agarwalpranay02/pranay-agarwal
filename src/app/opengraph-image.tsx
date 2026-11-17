@@ -32,7 +32,7 @@ export default async function Image() {
             <img src={src} width={236} height={236} alt="" style={{ borderRadius: 4, objectFit: "cover" }} />
             <div style={{ position: "absolute", top: -16, left: -16, width: 268, height: 268, border: "3px solid #1f4bff", borderRadius: 3 }} />
             <div style={{ position: "absolute", top: -54, left: -17, display: "flex", background: "#1f4bff", color: "#fff", fontFamily: "Fragment", fontSize: 22, padding: "4px 12px" }}>
-              ml_engineer 0.99
+              person 0.99
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
