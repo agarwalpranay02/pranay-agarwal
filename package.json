@@ -9,7 +9,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
-    "pdf": "node scripts/resume-pdf.mjs"
+    "resume": "tsx scripts/build-resume.ts"
   },
   "dependencies": {
     "@fontsource-variable/schibsted-grotesk": "^5.3.0",
@@ -32,6 +32,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "tailwindcss": "4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "^5",
     "wait-on": "^9.5.1"
   }

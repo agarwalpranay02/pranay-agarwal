@@ -87,10 +87,13 @@ test("theme toggle switches and persists", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("data-theme", after!);
 });
 
-test("résumé PDF is downloadable", async ({ request }) => {
-  const r = await request.get("/pranay-agarwal-resume.pdf");
-  expect(r.status()).toBe(200);
-  expect(r.headers()["content-type"]).toContain("pdf");
+test("résumé PDF and LaTeX source are downloadable", async ({ request }) => {
+  const pdf = await request.get("/pranay-agarwal-resume.pdf");
+  expect(pdf.status()).toBe(200);
+  expect(pdf.headers()["content-type"]).toContain("pdf");
+  const tex = await request.get("/pranay-agarwal-resume.tex");
+  expect(tex.status()).toBe(200);
+  expect(await tex.text()).toContain("\\begin{document}");
 });
 
 test("unknown pages return the 404 page", async ({ page }) => {

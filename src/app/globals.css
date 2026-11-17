@@ -220,43 +220,58 @@ img { max-width: 100%; height: auto; }
   a { text-decoration: none !important; color: inherit !important; }
 }
 
-/* ---------- résumé sheet ---------- */
+/* ---------- résumé sheet: the layout of Jake Gutierrez's LaTeX template, in Latin Modern ---------- */
+@font-face { font-family: "LM Roman"; src: url("/fonts/lmroman10-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "LM Roman"; src: url("/fonts/lmroman10-bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "LM Roman"; src: url("/fonts/lmroman10-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "LM Roman Caps"; src: url("/fonts/lmromancaps10-regular.woff2") format("woff2"); font-display: swap; }
+
 .cv {
-  background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
-  padding: clamp(1.25rem, 4vw, 2.6rem); font-size: 0.875rem; line-height: 1.5; color: var(--ink-2);
+  --cv-ink: #111; --cv-paper: #fff;
+  background: var(--cv-paper); color: var(--cv-ink);
+  font-family: "LM Roman", "Latin Modern Roman", "Computer Modern Serif", Georgia, serif;
+  font-size: 0.95rem; line-height: 1.38;
+  border: 1px solid var(--line); border-radius: 4px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  padding: clamp(1.1rem, 4.5vw, 2.75rem) clamp(1rem, 5vw, 3.1rem);
 }
-.cv strong { color: var(--ink); font-weight: 600; }
+[data-theme="dark"] .cv { border-color: var(--line-strong); }
+.cv strong { font-weight: 700; }
 .cv a { color: inherit; text-decoration: none; }
-.cv a:hover { text-decoration: underline; text-underline-offset: 3px; }
-.cv-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem 2rem; padding-bottom: 0.9rem; border-bottom: 1.5px solid var(--ink); }
-.cv-name { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; color: var(--ink); }
-.cv-role { margin-top: 0.3rem; color: var(--ink); }
-.cv-contact { font-size: 0.8125rem; text-align: right; }
-.cv-summary { margin-top: 0.85rem; }
-.cv-block { margin-top: 1.1rem; }
-.cv-h { font-size: 0.9375rem; font-weight: 640; color: var(--accent); padding-bottom: 0.25rem; margin-bottom: 0.45rem; border-bottom: 1px solid var(--line); }
-.cv-item + .cv-item { margin-top: 0.55rem; }
-.cv-row { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
-.cv-date { white-space: nowrap; font-size: 0.8125rem; color: var(--muted); }
-.cv-list { margin-top: 0.2rem; padding-left: 1.05rem; list-style: disc; }
-.cv-list li + li { margin-top: 0.12rem; }
-.cv-list li::marker { color: var(--line-strong); }
-.cv-pubs { padding-left: 1.2rem; list-style: decimal; }
-.cv-pubs li + li { margin-top: 0.25rem; }
-.cv-line { margin-top: 0.3rem; }
-.cv-skills > div { display: grid; grid-template-columns: 8.5rem 1fr; gap: 0.75rem; }
-.cv-skills > div + div { margin-top: 0.12rem; }
-.cv-skills dt { color: var(--ink); font-weight: 560; }
-@media (max-width: 600px) {
-  .cv-contact { text-align: left; }
+.cv-head { text-align: center; }
+.cv-name { font-family: "LM Roman Caps", "LM Roman", serif; font-size: 2.15rem; line-height: 1.1; letter-spacing: 0.01em; }
+.cv-contact { margin-top: 0.3rem; display: flex; flex-wrap: wrap; justify-content: center; font-size: 0.8rem; }
+.cv-contact li + li::before { content: "|"; margin: 0 0.45rem; }
+.cv-contact a, .cv-link { text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 0.5px; }
+.cv-block { margin-top: 0.85rem; }
+.cv-h { font-family: "LM Roman Caps", "LM Roman", serif; font-size: 1.12rem; font-weight: 400; border-bottom: 0.8px solid var(--cv-ink); padding-bottom: 0.05rem; margin-bottom: 0.35rem; }
+.cv-item { padding-left: 0.85rem; }
+.cv-item + .cv-item { margin-top: 0.4rem; }
+.cv-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.cv-row > p:last-child { white-space: nowrap; text-align: right; }
+.cv-sub { font-style: italic; font-size: 0.86rem; }
+.cv-tech { font-size: 0.86rem; }
+.cv-sep { margin: 0 0.15rem; }
+.cv-list { margin-top: 0.15rem; padding-left: 1.85rem; list-style: disc; font-size: 0.9rem; }
+.cv-block > .cv-list { padding-left: 1.85rem; }
+.cv-list li + li { margin-top: 0.08rem; }
+.cv-pub:hover { text-decoration: underline; text-underline-offset: 2px; }
+.cv-skills { padding-left: 0.85rem; font-size: 0.88rem; }
+.cv-skills > div { display: flex; flex-wrap: wrap; column-gap: 0.3rem; }
+.cv-skills dt { font-weight: 700; }
+@media (max-width: 640px) {
   .cv-row { flex-direction: column; gap: 0; }
-  .cv-skills > div { grid-template-columns: 1fr; gap: 0; }
+  .cv-row > p:last-child { text-align: left; }
+  .cv-contact { gap: 0.15rem 0.9rem; }
+  .cv-contact li + li::before { content: none; }
+  .cv-item { padding-left: 0; }
+  .cv-list, .cv-block > .cv-list { padding-left: 1.1rem; }
+  .cv-skills { padding-left: 0; }
 }
 @media print {
+  /* the printed copy is the LaTeX PDF; printing the page gives the same layout */
   .frame.pad { padding: 0 !important; }
-  .cv { border: 0; padding: 0; font-size: 8.4pt; line-height: 1.3; border-radius: 0; }
-  .cv-name { font-size: 19pt; }
-  .cv-block { margin-top: 6pt; break-inside: auto; }
-  .cv-h { margin-bottom: 3pt; padding-bottom: 1.5pt; }
-  .cv-item, .cv-pubs li { break-inside: avoid; }
+  .cv { border: 0; box-shadow: none; padding: 0; font-size: 9.6pt; }
+  .cv-name { font-size: 22pt; }
+  .cv-block { margin-top: 6pt; }
+  .cv-item, .cv-list li { break-inside: avoid; }
 }
