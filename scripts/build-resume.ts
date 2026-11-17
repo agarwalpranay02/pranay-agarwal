@@ -72,7 +72,7 @@ out(String.raw`%-------------------------
 \renewcommand{\footrulewidth}{0pt}
 
 % A4 page, tight margins
-\usepackage[a4paper,top=0.45in,bottom=0.4in,left=0.5in,right=0.5in]{geometry}
+\usepackage[a4paper,top=0.36in,bottom=0.3in,left=0.5in,right=0.5in]{geometry}
 
 \urlstyle{same}
 \raggedbottom
@@ -127,7 +127,7 @@ out(`    {\\Huge \\scshape ${esc(RESUME.name)}} \\\\ \\vspace{2pt}`);
 const ICON: Record<string, string> = {
   phone: "\\faPhone*", email: "\\faEnvelope", web: "\\faGlobe", linkedin: "\\faLinkedin", github: "\\faGithub", orcid: "\\faOrcid",
 };
-out(`    \\small ${RESUME.contacts.map((c) => `${c.icon ? `\\icon{${ICON[c.icon]}}` : ""}${href(c.url, c.label)}`).join(" \\quad ")}`);
+out(`    \\small ${RESUME.contacts.map((c) => `${c.icon ? `\\icon{${ICON[c.icon]}}` : ""}${href(c.url, c.label)}`).join(" ~$|$~ ")}`);
 out(`\\end{center}`);
 out();
 
@@ -157,6 +157,14 @@ const subheadings = (title: string, entries: typeof RESUME.education | typeof RE
 
 subheadings("Education", RESUME.education);
 subheadings("Experience", RESUME.experience);
+
+out(`\\section{Intellectual Property}`);
+out(`  \\resumeSubHeadingListStart`);
+out(`    \\item \\begin{itemize}[leftmargin=0.15in]`);
+for (const d of RESUME.ip) out(`      \\resumeItem{${tex(d)}}`);
+out(`    \\end{itemize}\\vspace{-4pt}`);
+out(`  \\resumeSubHeadingListEnd`);
+out();
 
 out(`\\section{Projects}`);
 out(`  \\resumeSubHeadingListStart`);

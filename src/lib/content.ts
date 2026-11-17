@@ -171,7 +171,7 @@ export const EDUCATION = {
   school: "Birla Institute of Technology, Mesra",
   degree: "B.Tech, Computer Science",
   period: "2022 – 2026",
-  grade: "CGPA 8.37 / 10 · First Class with Distinction",
+  grade: "CGPA 8.37 / 10",
   extra: { name: "IELTS Academic", score: "7.5 overall (C1)", detail: "Listening 8.0 · Reading 8.5 · Writing 7.0 · Speaking 7.0 · May 2026" },
 };
 
