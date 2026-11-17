@@ -120,15 +120,11 @@ function Experience() {
               <h3 className="text-[1.0625rem] font-[650]">{r.title}</h3>
               <span className="muted text-[0.875rem]">{r.right}</span>
             </div>
-            {r.roles?.map((role, i) => (
-              <div key={role.title} className="flex flex-wrap items-baseline justify-between gap-x-4">
-                <p className="ink-2 text-[0.9375rem]">
-                  {role.title}
-                  {r.current && i === 0 && <span className="ml-2 rounded-[4px] bg-[var(--accent-soft)] px-1.5 py-px text-[0.75rem] font-medium text-[var(--accent)]">Current</span>}
-                </p>
-                <span className="muted text-[0.875rem]">{role.dates}</span>
-              </div>
-            ))}
+            <p className="ink-2 text-[0.9375rem]">
+              {r.sub}
+              {r.current && <span className="ml-2 rounded-[4px] bg-[var(--accent-soft)] px-1.5 py-px text-[0.75rem] font-medium text-[var(--accent)]">Current</span>}
+            </p>
+            <p className="muted text-[0.875rem]">{r.subRight}</p>
             <ul className="exp-list ink-2 mt-3 grid list-disc gap-1.5 pl-5 text-[0.9375rem] marker:text-[var(--line-strong)]">
               {r.bullets?.map((b) => <li key={b}><Rich text={withoutGitHub(b)} /></li>)}
             </ul>

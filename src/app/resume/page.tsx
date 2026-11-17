@@ -69,6 +69,7 @@ export default function ResumePage() {
               {e.roles?.map((role) => (
                 <div key={role.title} className="cv-row cv-sub"><p>{role.title}</p><p>{role.dates}</p></div>
               ))}
+              {!e.roles && e.sub && <div className="cv-row cv-sub"><p>{e.sub}</p><p>{e.subRight}</p></div>}
               <ul className="cv-list">{e.bullets?.map((b) => <li key={b}><Rich text={b} /></li>)}</ul>
             </div>
           ))}

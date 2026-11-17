@@ -56,13 +56,9 @@ export const RESUME = {
   experience: [
     {
       title: "MaxBrain Technologies",
-      right: "Jaipur, India",
-      sub: "",
-      subRight: "",
-      roles: [
-        { title: "AI/ML Engineer", dates: "Jan 2026 – Present" },
-        { title: "AI/ML Research Intern", dates: "Jul 2025 – Dec 2025" },
-      ],
+      right: "Jul 2025 – Present",
+      sub: "AI/ML Engineer (Jan 2026 – Present); AI/ML Research Intern (Jul 2025 – Dec 2025)",
+      subRight: "Jaipur, India",
       current: true,
       bullets: [
         "Ran a **bibliometric review of 1,081 papers (2014–2024)** on deep learning for plant disease detection with **Lens.org, Scopus and VOSviewer**; published in [Springer Nature's Discover AI](https://doi.org/10.1007/s44163-026-02310-z).",
@@ -75,10 +71,9 @@ export const RESUME = {
     },
     {
       title: "Starlight Data Solutions",
-      right: "Noida, India",
-      sub: "",
-      subRight: "",
-      roles: [{ title: "Software Engineering Intern", dates: "May 2025 – Jul 2025" }],
+      right: "May 2025 – Jul 2025",
+      sub: "Software Engineering Intern",
+      subRight: "Noida, India",
       bullets: [
         "Contributed to an **automated firmware management system** tracking releases across OEM vendor websites.",
         "Worked on its **Python scraping engine** (Selenium, BeautifulSoup), **Flask** API, **MongoDB** and **Elasticsearch**.",
