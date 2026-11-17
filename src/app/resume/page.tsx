@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fragment } from "react";
+import { Rich } from "@/components/Rich";
 import { DocIcon } from "@/components/Icons";
 import { PrintButton } from "@/components/PrintButton";
 import { RESUME } from "@/lib/resume";
@@ -12,22 +12,6 @@ export const metadata: Metadata = {
 
 const PDF_PATH = "/pranay-agarwal-resume.pdf";
 const TEX_PATH = "/pranay-agarwal-resume.tex";
-
-/** Renders the résumé's inline markup: **bold**, *italic* and [label](url). */
-function Rich({ text }: { text: string }) {
-  const parts = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean);
-  return (
-    <>
-      {parts.map((p, i) => {
-        const link = p.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-        if (link) return <a key={i} className="cv-link" href={link[2]} target="_blank" rel="noopener noreferrer">{link[1]}</a>;
-        if (p.startsWith("**")) return <strong key={i}>{p.slice(2, -2)}</strong>;
-        if (p.startsWith("*")) return <em key={i}>{p.slice(1, -1)}</em>;
-        return <Fragment key={i}>{p}</Fragment>;
-      })}
-    </>
-  );
-}
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -65,10 +49,16 @@ export default function ResumePage() {
 
         <Block title="Education">
           {r.education.map((e) => (
+            e.compact ? (
+              <div key={e.title} className="cv-item">
+                <div className="cv-row"><p><strong>{e.title}</strong> <span className="cv-sep">|</span> <em className="cv-tech">{e.sub}</em></p><p>{e.right}</p></div>
+              </div>
+            ) : (
             <div key={e.title} className="cv-item">
               <div className="cv-row"><p><strong>{e.title}</strong></p><p>{e.right}</p></div>
               {e.sub && <div className="cv-row cv-sub"><p><Rich text={e.sub} /></p><p>{e.subRight}</p></div>}
             </div>
+            )
           ))}
         </Block>
 
@@ -87,14 +77,18 @@ export default function ResumePage() {
             <div key={p.name} className="cv-item">
               <div className="cv-row">
                 <p><strong>{p.name}</strong> <span className="cv-sep">|</span> <em className="cv-tech">{p.tech}</em></p>
-                <p><a className="cv-link" href={p.link.url}>{p.link.label}</a></p>
+                <p className="cv-links">
+                  {p.links.map((l, i) => (
+                    <span key={l.url}>{i > 0 && <span className="cv-sep"> | </span>}<a className="cv-link" href={l.url} target="_blank" rel="noopener noreferrer">{l.label}</a></span>
+                  ))}
+                </p>
               </div>
               <ul className="cv-list">{p.bullets.map((b) => <li key={b}><Rich text={b} /></li>)}</ul>
             </div>
           ))}
         </Block>
 
-        <Block title="Research & Publications">
+        <Block title="Publications">
           <ul className="cv-list">
             {r.publications.map((p) => (
               <li key={p.text}>

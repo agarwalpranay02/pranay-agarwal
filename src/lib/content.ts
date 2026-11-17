@@ -78,46 +78,6 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
-export type Role = {
-  company: string;
-  title: string;
-  place: string;
-  period: string;
-  current?: boolean;
-  note?: string;
-  points: string[];
-  tags: string[];
-};
-
-export const EXPERIENCE: Role[] = [
-  {
-    company: "MaxBrain Technologies",
-    title: "AI/ML Engineer",
-    place: "Jaipur",
-    period: "Jul 2025 – Present",
-    current: true,
-    note: "Joined as an AI/ML research intern.",
-    points: [
-      "Built two field datasets of leaf images with farmers near Jaipur: ridge gourd (9,000 images, IEEE DataPort) and brinjal (13,600 images, Mendeley Data).",
-      "Designed a DenseNet121 + XGBoost hybrid that reached 92.0% on ridge gourd disease; first author of the resulting Springer paper (MIND 2025).",
-      "Co-designed an IoT device for real-time collection and augmentation of plant samples, registered with the Government of India (Design No. 476293-001).",
-      "Built Fasal Saathi with a teammate, an Android app that tells farmers whether a leaf is healthy from one photo, published on Google Play by MaxBrain.",
-    ],
-    tags: ["Computer vision", "Dataset engineering", "PyTorch", "TensorFlow", "XGBoost", "IoT"],
-  },
-  {
-    company: "Starlight Data Solutions",
-    title: "Software Engineering Intern",
-    place: "Noida",
-    period: "May 2025 – Jul 2025",
-    points: [
-      "Contributed to an automated firmware management system that tracks firmware releases across OEM websites, so administrators no longer check each vendor's site by hand.",
-      "Worked with the Python scraping engine that collects release data, the Flask backend, MongoDB storage and Elasticsearch for fast search over versions.",
-    ],
-    tags: ["Python", "Web scraping", "Flask", "MongoDB", "Elasticsearch"],
-  },
-];
-
 export type Paper = {
   title: string;
   authors: string;

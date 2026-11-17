@@ -16,7 +16,9 @@
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
-\usepackage[T1]{fontenc}
+% ATS: no f-ligatures, so "certified" is extracted as text, not as an unmapped glyph
+\usepackage{microtype}
+\DisableLigatures[f]{encoding = *, family = *}
 \usepackage{xurl}
 \input{glyphtounicode}
 
@@ -77,42 +79,44 @@
 \begin{document}
 
 \begin{center}
-    \textbf{\Huge \scshape Pranay Agarwal} \\ \vspace{2pt}
+    {\Huge \scshape Pranay Agarwal} \\ \vspace{2pt}
     \small \href{mailto:pranayagarwal2511@gmail.com}{\underline{pranayagarwal2511@gmail.com}} $|$ \href{https://pranay-agarwal.vercel.app}{\underline{pranay-agarwal.vercel.app}} $|$ \href{https://www.linkedin.com/in/pranay-agarwal-83b177295/}{\underline{LinkedIn}} $|$ \href{https://scholar.google.com/citations?hl=en&user=L2xx3fgAAAAJ}{\underline{Google Scholar}} $|$ \href{https://orcid.org/0009-0009-6879-4074}{\underline{ORCID 0009-0009-6879-4074}}
 \end{center}
 
 \section{Education}
   \resumeSubHeadingListStart
     \resumeSubheading{Birla Institute of Technology, Mesra}{Jaipur Campus, India}{Bachelor of Technology in Computer Science; CGPA: 8.37/10, First Class with Distinction}{2022 -- 2026}
-    \resumeSubheading{Blue Heaven Vidyalaya}{Jaipur, India}{Senior Secondary (Class XII), CBSE; Physics, Chemistry, Mathematics: 92.4\%}{2022}
-    \resumeSubheading{Ryan International School}{Jaipur, India}{Secondary (Class X), CBSE: 91.4\%}{2020}
+    \resumeProjectHeading{\textbf{Blue Heaven Vidyalaya, Jaipur} $|$ \emph{Senior Secondary (Class XII), CBSE: 92.4\%}}{2022}
+    \resumeProjectHeading{\textbf{Ryan International School, Jaipur} $|$ \emph{Secondary (Class X), CBSE: 91.4\%}}{2020}
   \resumeSubHeadingListEnd
 
 \section{Experience}
   \resumeSubHeadingListStart
-    \resumeSubheading{AI/ML Engineer}{Jul 2025 -- Present}{MaxBrain Technologies (joined as AI/ML Research Intern)}{Jaipur, India}
+    \resumeSubheading{MaxBrain Technologies}{Jul 2025 -- Present}{AI/ML Engineer (Jan 2026 -- Present); AI/ML Research Intern (Jul 2025 -- Dec 2025)}{Jaipur, India}
       \resumeItemListStart
-        \resumeItem{Built two public field datasets of leaf images with farmers near Jaipur: \textbf{ridge gourd (9,000 images, IEEE DataPort)} and \textbf{brinjal (13,600, Mendeley Data)}.}
-        \resumeItem{Designed a \textbf{DenseNet121 + XGBoost} hybrid reaching \textbf{92.0\%} on ridge gourd disease; \textbf{first-author} Springer paper (MIND 2025).}
-        \resumeItem{Co-designed an \textbf{IoT device} for plant-sample collection; \textbf{design registered with Govt. of India} (476293-001).}
-        \resumeItem{Built \textbf{Fasal Saathi} with a teammate, a one-photo leaf diagnosis app \textbf{published on Google Play} by MaxBrain.}
+        \resumeItem{Ran a \textbf{bibliometric review of 1,081 papers (2014--2024)} on deep learning for plant disease detection with \textbf{Lens.org, Scopus and VOSviewer}; published in \href{https://doi.org/10.1007/s44163-026-02310-z}{\underline{Springer Nature's Discover AI}}.}
+        \resumeItem{Collected \textbf{600 ridge gourd leaf photos} on farms in Jaipur and expanded them to a \textbf{9,000-image dataset} with 15 preprocessing techniques; \href{https://ieee-dataport.org/documents/preprocessed-indian-ridge-gourd-leaf-image-dataset-healthy-and-diseased-leaf-minor}{\underline{published on IEEE DataPort}}, featured in its newsletter.}
+        \resumeItem{Benchmarked \textbf{5 models} and designed a \textbf{DenseNet121 + XGBoost} hybrid with \textbf{92.0\% accuracy (F1 0.92)} vs 89.6\% for the best CNN; \textbf{first-author} Springer paper, MIND 2025 (\href{https://github.com/agarwalpranay02/Hybrid-Deep-Learning-for-Plant-Disease-Diagnosis}{\underline{code}}).}
+        \resumeItem{Co-developed \textbf{Fasal Saathi}, an AI Android app for one-photo leaf diagnosis, \href{https://play.google.com/store/apps/details?id=com.param.finddiseaseai}{\underline{live on Google Play}} with \textbf{100+ downloads}; covered by \textbf{Punjab Kesari}.}
+        \resumeItem{Extended to brinjal: a \textbf{13,600-image dataset} from 850 field photos on \href{https://data.mendeley.com/datasets/c39p3k87g2}{\underline{Mendeley Data}}, adding a second crop to the app.}
+        \resumeItem{Co-designed an \textbf{IoT device for real-time leaf image capture and augmentation}, replacing one-by-one phone photos; \textbf{design registered with the Government of India} (476293-001).}
       \resumeItemListEnd
-    \resumeSubheading{Software Engineering Intern}{May 2025 -- Jul 2025}{Starlight Data Solutions}{Noida, India}
+    \resumeSubheading{Starlight Data Solutions}{May 2025 -- Jul 2025}{Software Engineering Intern}{Noida, India}
       \resumeItemListStart
         \resumeItem{Contributed to an \textbf{automated firmware management system} tracking releases across OEM vendor websites.}
-        \resumeItem{Worked with its \textbf{Python scraping engine}, \textbf{Flask} backend, \textbf{MongoDB} storage and \textbf{Elasticsearch} search.}
+        \resumeItem{Worked on its \textbf{Python scraping engine} (Selenium, BeautifulSoup), \textbf{Flask} API, \textbf{MongoDB} and \textbf{Elasticsearch}.}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
 \section{Projects}
   \resumeSubHeadingListStart
-    \resumeProjectHeading{\textbf{LeafCheckup} $|$ \emph{PyTorch, ONNX Runtime Web, WebAssembly, Next.js, FastAPI}}{\href{https://leafcheckup.vercel.app}{\underline{leafcheckup.vercel.app}}}
+    \resumeProjectHeading{\textbf{LeafCheckup} $|$ \emph{PyTorch, ONNX Runtime Web, WebAssembly, Next.js, FastAPI}}{\href{https://leafcheckup.vercel.app}{\underline{Live}} $|$ \href{https://github.com/agarwalpranay02/leafcheckup}{\underline{Code}}}
       \resumeItemListStart
         \resumeItem{Trained \textbf{EfficientNet-B0}: \textbf{94.9\% on 217 unseen leaves} (leak-free split); \textbf{98.9\% vs 92.0\%} over the paper baseline.}
         \resumeItem{Runs \textbf{fully in the browser} (ONNX Runtime Web, WebAssembly, WebGPU) at \textbf{$\sim$120 ms/photo}; offline-ready PWA.}
         \resumeItem{\textbf{Out-of-distribution detector (0.993 AUROC)}, calibrated confidence (\textbf{ECE 1.8\%}), heatmaps, developer \textbf{API}.}
       \resumeItemListEnd
-    \resumeProjectHeading{\textbf{TinyMotion} $|$ \emph{TensorFlow, TFLite Micro, C99, TypeScript, Next.js}}{\href{https://tinymotion.vercel.app}{\underline{tinymotion.vercel.app}}}
+    \resumeProjectHeading{\textbf{TinyMotion} $|$ \emph{TensorFlow, TFLite Micro, C99, TypeScript, Next.js}}{\href{https://tinymotion.vercel.app}{\underline{Live}} $|$ \href{https://github.com/agarwalpranay02/tinymotion}{\underline{Code}}}
       \resumeItemListStart
         \resumeItem{\textbf{35,558-parameter} residual 1D CNN: \textbf{93.4 $\pm$ 1.1\%} on 9 unseen people (UCI HAR, 5 seeds), live in the browser.}
         \resumeItem{\textbf{Rotation augmentation} keeps \textbf{92.8\%} with the phone at any angle, where the paper's model falls to 80.3\%.}
@@ -120,14 +124,12 @@
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
-\section{Research \& Publications}
+\section{Publications}
   \resumeSubHeadingListStart
     \item \begin{itemize}[leftmargin=0.15in]
       \resumeItem{\href{https://link.springer.com/chapter/10.1007/978-3-032-31233-4_7}{\textbf{P. Agarwal}, P. Sharma, V. Sharma. \textit{A Hybrid Deep Learning Approach for Automated Plant Disease Diagnosis in Indian Ridge Gourd: Dataset Creation and Real-World Application.} MIND 2025, Springer CCIS, 2026. (First author)}}
-      \resumeItem{\href{https://doi.org/10.1007/s44163-026-02310-z}{P. Sharma, \textbf{P. Agarwal}, A. K. Bairwa, V. Sharma. \textit{A comprehensive review and bibliometric analysis of deep learning applications in plant disease detection.} Discover Artificial Intelligence, 2026. (Equal contribution)}}
+      \resumeItem{\href{https://doi.org/10.1007/s44163-026-02310-z}{P. Sharma, \textbf{P. Agarwal}, A. K. Bairwa, V. Sharma. \textit{A comprehensive review and bibliometric analysis of deep learning applications in plant disease detection.} Discover Artificial Intelligence, Springer Nature, 2026. (Equal contribution)}}
       \resumeItem{\href{https://www.scrs.in/conference/wcaiaa2026}{P. Sharma, \textbf{P. Agarwal}, J. Goyal. \textit{TinyML-Based Lightweight Deep Learning Model for Human Activity Recognition on Edge Devices.} WCAIAA 2026, Springer LNNS, to appear.}}
-      \resumeItem{\textbf{Registered Design No. 476293-001}, Government of India (Oct 2025): IoT-based device for real-time data collection and augmentation of plant samples. \href{https://drive.google.com/file/d/1fnbNIrKeal7NGtuPIZunkuAs7jU-0VHw/view?usp=sharing}{\underline{Certificate}}}
-      \resumeItem{\textbf{Public datasets:} \href{https://doi.org/10.21227/469z-vm04}{\underline{Ridge gourd leaf images (9,000), IEEE DataPort}}; \href{https://doi.org/10.17632/c39p3k87g2.2}{\underline{Brinjal leaf images (13,600), Mendeley Data}}.}
     \end{itemize}\vspace{-4pt}
   \resumeSubHeadingListEnd
 
@@ -135,22 +137,21 @@
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
      \textbf{Languages}{: Python, TypeScript, JavaScript, C, C++, Java, SQL, Bash} \\
-     \textbf{Machine Learning}{: PyTorch, TensorFlow, Keras, scikit-learn, XGBoost, timm, OpenCV, NumPy, pandas} \\
+     \textbf{ML \& Computer Vision}{: PyTorch, TensorFlow, Keras, scikit-learn, XGBoost, timm, OpenCV, NumPy, pandas} \\
      \textbf{Edge \& On-Device AI}{: ONNX Runtime Web, TensorFlow Lite (INT8), TFLite Micro, WebAssembly, WebGPU} \\
-     \textbf{Generative AI}{: LangChain, RAG, Vector Search, OpenAI API} \\
-     \textbf{Web \& Data}{: Next.js, React, Node.js, FastAPI, Flask, PostgreSQL, MongoDB, Elasticsearch} \\
-     \textbf{DevOps \& Testing}{: Docker, GitHub Actions, Vercel, Linux, Git, Playwright, pytest}
+     \textbf{Web \& Data}{: Next.js, React, Node.js, FastAPI, Flask, PostgreSQL, MongoDB, Elasticsearch, Selenium} \\
+     \textbf{DevOps \& Testing}{: Docker, GitHub Actions, Vercel, Linux, Git, Playwright, pytest} \\
+     \textbf{Concepts}{: Deep Learning, Transfer Learning, Data Augmentation, Quantization, Edge AI, RAG, Bibliometric Analysis}
     }}
  \end{itemize}
 
 \section{Achievements \& Certifications}
   \resumeSubHeadingListStart
     \item \begin{itemize}[leftmargin=0.15in]
-      \resumeItem{\textbf{Featured Researcher}, Springer Nature India Research Tour 2025; covered by \textbf{Punjab Kesari} and \textbf{IEEE DataPort}.}
-      \resumeItem{\textbf{Paper presenter}, WCAIAA 2026 (7th World Conference on Artificial Intelligence), NFSU Goa.}
+      \resumeItem{\textbf{Featured Researcher}, Springer Nature India Research Tour 2025; \textbf{paper presenter}, WCAIAA 2026, NFSU Goa.}
       \resumeItem{\textbf{Oracle Certified Professional}: OCI Data Science, OCI Generative AI, AI Vector Search; OCI AI Foundations Associate.}
+      \resumeItem{\textbf{Coordinator, Sports Committee}, BIT Mesra; senior coordinator of Cavorts 2023, the annual sports tournament.}
       \resumeItem{\textbf{IELTS Academic}: overall band 7.5 (CEFR C1), May 2026.}
-      \resumeItem{\textbf{Coordinator, Sports Committee}, BIT Mesra; senior coordinator of the Cavorts 2023 annual sports tournament.}
     \end{itemize}\vspace{-4pt}
   \resumeSubHeadingListEnd
 

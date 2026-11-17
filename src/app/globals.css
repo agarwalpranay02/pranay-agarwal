@@ -165,6 +165,10 @@ img { max-width: 100%; height: auto; }
 
 /* ---------- print (résumé) ---------- */
 
+/* links inside experience bullets on the home page */
+.exp-list a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
+.exp-list a:hover { text-decoration-color: var(--accent); }
+
 /* ---------- case studies ---------- */
 .h3 { font-size: 1rem; font-weight: 640; letter-spacing: -0.01em; }
 .body { color: var(--ink-2); line-height: 1.7; }
@@ -242,7 +246,7 @@ img { max-width: 100%; height: auto; }
 .cv-name { font-family: "LM Roman Caps", "LM Roman", serif; font-size: 2.15rem; line-height: 1.1; letter-spacing: 0.01em; }
 .cv-contact { margin-top: 0.3rem; display: flex; flex-wrap: wrap; justify-content: center; font-size: 0.8rem; }
 .cv-contact li + li::before { content: "|"; margin: 0 0.45rem; }
-.cv-contact a, .cv-link { text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 0.5px; }
+.cv-contact a, .cv a.cv-link, .cv-list a { text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 0.5px; }
 .cv-block { margin-top: 0.85rem; }
 .cv-h { font-family: "LM Roman Caps", "LM Roman", serif; font-size: 1.12rem; font-weight: 400; border-bottom: 0.8px solid var(--cv-ink); padding-bottom: 0.05rem; margin-bottom: 0.35rem; }
 .cv-item { padding-left: 0.85rem; }

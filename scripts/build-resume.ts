@@ -55,7 +55,9 @@ out(String.raw`%-------------------------
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
-\usepackage[T1]{fontenc}
+% ATS: no f-ligatures, so "certified" is extracted as text, not as an unmapped glyph
+\usepackage{microtype}
+\DisableLigatures[f]{encoding = *, family = *}
 \usepackage{xurl}
 \input{glyphtounicode}
 
@@ -117,7 +119,7 @@ out(String.raw`%-------------------------
 `);
 
 out(`\\begin{center}`);
-out(`    \\textbf{\\Huge \\scshape ${esc(RESUME.name)}} \\\\ \\vspace{2pt}`);
+out(`    {\\Huge \\scshape ${esc(RESUME.name)}} \\\\ \\vspace{2pt}`);
 out(`    \\small ${RESUME.contacts.map((c) => href(c.url, c.label)).join(" $|$ ")}`);
 out(`\\end{center}`);
 out();
@@ -126,7 +128,8 @@ const subheadings = (title: string, entries: typeof RESUME.education | typeof RE
   out(`\\section{${title}}`);
   out(`  \\resumeSubHeadingListStart`);
   for (const e of entries) {
-    if (e.sub) out(`    \\resumeSubheading{${tex(e.title)}}{${tex(e.right)}}{${tex(e.sub)}}{${tex(e.subRight)}}`);
+    if (e.compact) out(`    \\resumeProjectHeading{\\textbf{${tex(e.title)}} $|$ \\emph{${tex(e.sub)}}}{${tex(e.right)}}`);
+    else if (e.sub) out(`    \\resumeSubheading{${tex(e.title)}}{${tex(e.right)}}{${tex(e.sub)}}{${tex(e.subRight)}}`);
     else out(`    \\resumeOneLine{${tex(e.title)}}{${tex(e.right)}}`);
     if (e.bullets?.length) {
       out(`      \\resumeItemListStart`);
@@ -144,7 +147,7 @@ subheadings("Experience", RESUME.experience);
 out(`\\section{Projects}`);
 out(`  \\resumeSubHeadingListStart`);
 for (const p of RESUME.projects) {
-  out(`    \\resumeProjectHeading{\\textbf{${tex(p.name)}} $|$ \\emph{${tex(p.tech)}}}{${href(p.link.url, p.link.label)}}`);
+  out(`    \\resumeProjectHeading{\\textbf{${tex(p.name)}} $|$ \\emph{${tex(p.tech)}}}{${p.links.map((l) => href(l.url, l.label)).join(" $|$ ")}}`);
   out(`      \\resumeItemListStart`);
   for (const b of p.bullets) out(`        \\resumeItem{${tex(b)}}`);
   out(`      \\resumeItemListEnd`);
@@ -152,7 +155,7 @@ for (const p of RESUME.projects) {
 out(`  \\resumeSubHeadingListEnd`);
 out();
 
-out(`\\section{Research \\& Publications}`);
+out(`\\section{Publications}`);
 out(`  \\resumeSubHeadingListStart`);
 out(`    \\item \\begin{itemize}[leftmargin=0.15in]`);
 for (const p of RESUME.publications) out(`      \\resumeItem{${p.url ? `\\href{${p.url}}{${tex(p.text)}}` : tex(p.text)}}`);

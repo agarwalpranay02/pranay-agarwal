@@ -2,10 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { DetectLabel } from "@/components/DetectLabel";
+import { Rich } from "@/components/Rich";
 import { ArrowUpRight, DocIcon, LinkedInIcon, MailIcon, OrcidIcon, PinIcon, ScholarIcon } from "@/components/Icons";
 import {
-  BEYOND, CERTIFICATIONS, DATASETS, DESIGN_REGISTRATION, EDUCATION, EXPERIENCE, PAPERS, PERSON, PRODUCTS, RECOGNITION, SCHOOLING,
+  BEYOND, CERTIFICATIONS, DATASETS, DESIGN_REGISTRATION, EDUCATION, PAPERS, PERSON, PRODUCTS, RECOGNITION, SCHOOLING,
 } from "@/lib/content";
+import { RESUME } from "@/lib/resume";
 import { STACK } from "@/lib/stack";
 
 function Section({ id, title, aside, children }: { id: string; title: string; aside?: React.ReactNode; children: React.ReactNode }) {
@@ -105,25 +107,26 @@ function Products() {
   );
 }
 
+/** The site carries no GitHub links (by request); the résumé keeps its code links. */
+const withoutGitHub = (t: string) => t.replace(/\s*\(\[code\]\(https:\/\/github\.com[^)]*\)\)/g, "");
+
 function Experience() {
   return (
     <Section id="experience" title="Experience">
-      <ol className="grid gap-8">
-        {EXPERIENCE.map((r) => (
-          <li key={r.company}>
+      <ol className="grid gap-9">
+        {RESUME.experience.map((r) => (
+          <li key={r.title}>
             <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-              <h3 className="text-[1.0625rem] font-[650]">
-                {r.title}, <span className="text-[var(--ink-2)]">{r.company}</span>
-              </h3>
-              <span className="muted text-[0.875rem]">{r.period}</span>
+              <h3 className="text-[1.0625rem] font-[650]">{r.title}</h3>
+              <span className="muted text-[0.875rem]">{r.right}</span>
             </div>
-            <p className="muted text-[0.875rem]">
-              {r.place}
+            <p className="ink-2 text-[0.9375rem]">
+              {r.sub}
               {r.current && <span className="ml-2 rounded-[4px] bg-[var(--accent-soft)] px-1.5 py-px text-[0.75rem] font-medium text-[var(--accent)]">Current</span>}
-              {r.note && <span> · {r.note}</span>}
             </p>
-            <ul className="ink-2 mt-3 grid list-disc gap-1.5 pl-5 text-[0.9375rem] marker:text-[var(--line-strong)]">
-              {r.points.map((pt) => <li key={pt}>{pt}</li>)}
+            <p className="muted text-[0.875rem]">{r.subRight}</p>
+            <ul className="exp-list ink-2 mt-3 grid list-disc gap-1.5 pl-5 text-[0.9375rem] marker:text-[var(--line-strong)]">
+              {r.bullets?.map((b) => <li key={b}><Rich text={withoutGitHub(b)} /></li>)}
             </ul>
           </li>
         ))}
@@ -131,7 +134,6 @@ function Experience() {
     </Section>
   );
 }
-
 function Stack() {
   return (
     <Section id="stack" title="Tech stack">
