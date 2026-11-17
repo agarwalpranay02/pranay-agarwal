@@ -291,6 +291,10 @@ function Recognition() {
           <span className="muted">{c.issuer}, {c.date}</span>
         </p>
       ))}
+      <p className="mt-2 text-[0.9375rem]">
+        <span className="font-medium">{EDUCATION.extra.name}: {EDUCATION.extra.score}</span>{" "}
+        <span className="muted">{EDUCATION.extra.detail}</span>
+      </p>
     </Section>
   );
 }
@@ -306,10 +310,6 @@ function Education() {
             <p className="muted text-[0.875rem]">{EDUCATION.grade}</p>
           </div>
           <span className="muted text-[0.875rem]">{EDUCATION.period}</span>
-        </div>
-        <div>
-          <h3 className="font-[650]">{EDUCATION.extra.name}: {EDUCATION.extra.score}</h3>
-          <p className="muted text-[0.875rem]">{EDUCATION.extra.detail}</p>
         </div>
       </div>
     </Section>

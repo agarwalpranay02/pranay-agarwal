@@ -30,12 +30,6 @@ export const RESUME = {
       sub: "Bachelor of Technology in Computer Science; CGPA: 8.37/10, First Class with Distinction",
       subRight: "2022 – 2026",
     },
-    {
-      title: "IELTS Academic: Overall Band 7.5 (CEFR C1)",
-      right: "May 2026",
-      sub: "",
-      subRight: "",
-    },
   ] as Entry[],
 
   experience: [
@@ -121,6 +115,7 @@ export const RESUME = {
     "**Featured Researcher**, Springer Nature India Research Tour 2025; covered by **Punjab Kesari** and **IEEE DataPort**.",
     "**Paper presenter**, WCAIAA 2026 (7th World Conference on Artificial Intelligence), NFSU Goa.",
     "**Oracle Certified Professional**: OCI Data Science, OCI Generative AI, AI Vector Search; OCI AI Foundations Associate.",
+    "**IELTS Academic**: overall band 7.5 (CEFR C1), May 2026.",
     "**Coordinator, Sports Committee**, BIT Mesra; senior coordinator of the Cavorts 2023 annual sports tournament.",
   ],
 
