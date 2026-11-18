@@ -158,14 +158,6 @@ const subheadings = (title: string, entries: typeof RESUME.education | typeof RE
 subheadings("Education", RESUME.education);
 subheadings("Experience", RESUME.experience);
 
-out(`\\section{Intellectual Property}`);
-out(`  \\resumeSubHeadingListStart`);
-out(`    \\item \\begin{itemize}[leftmargin=0.15in]`);
-for (const d of RESUME.ip) out(`      \\resumeItem{${tex(d)}}`);
-out(`    \\end{itemize}\\vspace{-4pt}`);
-out(`  \\resumeSubHeadingListEnd`);
-out();
-
 out(`\\section{Projects}`);
 out(`  \\resumeSubHeadingListStart`);
 for (const p of RESUME.projects) {

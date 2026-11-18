@@ -75,10 +75,6 @@ export default function ResumePage() {
           ))}
         </Block>
 
-        <Block title="Intellectual Property">
-          <ul className="cv-list">{r.ip.map((d) => <li key={d}><Rich text={d} /></li>)}</ul>
-        </Block>
-
         <Block title="Projects">
           {r.projects.map((p) => (
             <div key={p.name} className="cv-item">

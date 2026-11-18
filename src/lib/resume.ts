@@ -64,6 +64,7 @@ export const RESUME = {
         "Benchmarked **5 models** and designed a **DenseNet121 + XGBoost** hybrid with **92.0% accuracy (F1 0.92)** vs 89.6% for the best CNN; **first-author** Springer paper, MIND 2025 ([code](https://github.com/agarwalpranay02/Hybrid-Deep-Learning-for-Plant-Disease-Diagnosis)).",
         "Co-developed **Fasal Saathi**, an AI Android app for one-photo leaf diagnosis, [live on Google Play](https://play.google.com/store/apps/details?id=com.param.finddiseaseai) with **100+ downloads**; covered by **Punjab Kesari**.",
         "Extended to brinjal: a **13,600-image dataset** from 850 field photos on [Mendeley Data](https://data.mendeley.com/datasets/c39p3k87g2), adding a second crop to the app.",
+        "Co-designed an **IoT device for real-time leaf image capture and augmentation** to replace one-by-one phone photos; **design registered with the Government of India** ([No. 476293-001](https://drive.google.com/file/d/1fnbNIrKeal7NGtuPIZunkuAs7jU-0VHw/view?usp=sharing)).",
       ],
     },
     {
@@ -107,18 +108,13 @@ export const RESUME = {
     },
   ] as Project[],
 
-  /** Shown under "Intellectual Property". It is a registered design (Designs Act, 2000), not a patent. */
-  ip: [
-    "**Registered Design No. 476293-001**, The Patent Office, Government of India (2025): *IoT-Based Device for Real-Time Data Collection and Augmentation for Plant and Agricultural Samples*; **P. Agarwal** (first-named) et al. [Certificate](https://drive.google.com/file/d/1fnbNIrKeal7NGtuPIZunkuAs7jU-0VHw/view?usp=sharing)",
-  ],
-
   publications: [
     {
       text: "**P. Agarwal**, P. Sharma, V. Sharma. *A Hybrid Deep Learning Approach for Automated Plant Disease Diagnosis in Indian Ridge Gourd: Dataset Creation and Real-World Application.* MIND 2025, Springer CCIS, 2026. (First author)",
       url: "https://link.springer.com/chapter/10.1007/978-3-032-31233-4_7",
     },
     {
-      text: "P. Sharma, **P. Agarwal**, A. K. Bairwa, V. Sharma. *A comprehensive review and bibliometric analysis of deep learning applications in plant disease detection.* Discover Artificial Intelligence, Springer Nature, 2026. (Equal contribution)",
+      text: "P. Sharma, **P. Agarwal**, A. K. Bairwa, V. Sharma. *A comprehensive review and bibliometric analysis of deep learning applications in plant disease detection.* Discover Artificial Intelligence, Springer Nature, 2026.",
       url: "https://doi.org/10.1007/s44163-026-02310-z",
     },
     {
