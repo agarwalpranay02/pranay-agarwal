@@ -239,7 +239,7 @@ export const RECOGNITION = [
 ];
 
 export const BEYOND = [
-  { title: "Coordinator, Sports Committee, BIT Mesra (Jaipur campus)", detail: "Senior coordinator for Cavorts 2023, the annual sports tournament held on 1–2 November 2023: planning, scheduling and running the events." },
+  { title: "Coordinator, Sports Committee, BIT Mesra", detail: "Senior coordinator for Cavorts 2023, the annual sports tournament held on 1–2 November 2023: planning, scheduling and running the events." },
   { title: "Volunteer, Ginor Devi Trust with BMVSS", detail: "Prosthetic limb distribution and fitting camps; recognised for outstanding service to the community, January 2026." },
   { title: "Volunteer caretaker, Ashirvad Old Age Home, Jaipur", detail: "December 2024 to August 2025." },
 ];
