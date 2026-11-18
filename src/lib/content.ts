@@ -114,7 +114,6 @@ export const PAPERS: Paper[] = [
     year: "2026",
     status: "published",
     doi: "10.1007/s44163-026-02310-z",
-    note: "Equal contribution",
     summary:
       "Reviews 1,081 publications from 2014 to 2024 on deep learning for plant disease detection, mapping which CNN approaches work, how they are evaluated and where the research community is collaborating.",
   },
