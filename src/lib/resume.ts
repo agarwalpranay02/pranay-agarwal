@@ -33,7 +33,7 @@ export const RESUME = {
   education: [
     {
       title: "Birla Institute of Technology, Mesra",
-      right: "India",
+      right: "Ranchi, India",
       sub: "Bachelor of Technology in Computer Science; CGPA: 8.37/10",
       subRight: "2022 – 2026",
     },
