@@ -27,7 +27,7 @@ export const SITE = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://pranay-agarwal.vercel.app",
   title: "Pranay Agarwal · AI/ML Engineer",
   description:
-    "Pranay Agarwal builds computer vision and on-device ML systems: two shipped AI products, Springer publications, public datasets and a registered design.",
+    "Pranay Agarwal builds computer vision and on-device ML systems: three shipped products, Springer publications, public datasets and a registered design.",
 };
 
 export type Metric = { value: string; label: string };
@@ -75,6 +75,22 @@ export const PRODUCTS: Product[] = [
       { value: "85.7 KB", label: "INT8 TensorFlow Lite model" },
     ],
     stack: ["TensorFlow", "TFLite Micro", "C99", "TypeScript", "Next.js", "PostgreSQL", "Playwright"],
+  },
+  {
+    slug: "formfino",
+    name: "FormFino",
+    tagline: "Application photos, signatures and PDFs sized to a form's exact rules",
+    url: "https://formfino.vercel.app",
+    image: "/img/formfino.webp",
+    imageAlt: "FormFino home page",
+    summary:
+      "Reads a screenshot of a portal's upload instructions, confirms the limits with you, and turns your originals into files that meet them: exact pixel sizes, KB ranges and PDF size caps. Everything runs in the browser, so identity documents are never uploaded. It also fills PDF forms and has 69 file tools.",
+    metrics: [
+      { value: "2.1 MB → 46 KB", label: "photo at exactly 200 × 230 px" },
+      { value: "11.6 MB → 484 KB", label: "3-page scan under a 500 KB cap" },
+      { value: "69", label: "file tools, none upload your files" },
+    ],
+    stack: ["Next.js", "React", "TypeScript", "pdf-lib", "PDF.js", "Tesseract.js", "fflate", "Vercel"],
   },
 ];
 
@@ -249,7 +265,7 @@ export const BEYOND = [
 export type Stage = { where: string; title: string; detail: string };
 export type Decision = { title: string; detail: string };
 export type CaseStudy = {
-  slug: "leafcheckup" | "tinymotion";
+  slug: "leafcheckup" | "tinymotion" | "formfino";
   problem: string;
   approach: string;
   results: { label: string; value: string; note?: string }[];
@@ -259,7 +275,8 @@ export type CaseStudy = {
   shots: { src: string; alt: string; w: number; h: number; caption: string }[];
   stack: { area: string; items: string }[];
   quality: string[];
-  research: string;
+  /** the paper a product grew out of, if any */
+  research?: string;
 };
 
 export const CASE_STUDIES: CaseStudy[] = [
@@ -391,5 +408,67 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     research:
       "Built on our WCAIAA 2026 paper on TinyML activity recognition, to appear in Springer Lecture Notes in Networks and Systems.",
+  },
+  {
+    slug: "formfino",
+    problem:
+      "Every exam, job and visa portal sets its own upload rules: a JPG photo of exactly 200 × 230 px between 20 and 50 KB, a signature under 20 KB, a marksheet PDF under 500 KB. Applicants bounce between converter sites, uploading identity documents to each one, and still see \"file size not within limit\" an hour before the deadline.",
+    approach:
+      "FormFino reads the rules from a screenshot with OCR that runs in the browser, shows each detected limit beside the text it came from for the applicant to confirm, and then prepares every file on the device. Nothing is uploaded, so the app needs no upload API, database or paid OCR service.",
+    results: [
+      { label: "Photo, 2.1 MB original, rule: JPG, 200 × 230 px, 20–50 KB", value: "46.0 KB", note: "exactly 200 × 230 px" },
+      { label: "Signature, 58.4 KB PNG, rule: JPG, 300 × 100 px, up to 20 KB", value: "13.7 KB", note: "exactly 300 × 100 px" },
+      { label: "Scanned PDF, 3 pages, 11.6 MB, rule: up to 500 KB", value: "483.8 KB", note: "rebuilt at 144 DPI, the highest resolution that fits" },
+      { label: "File tools", value: "69", note: "26 PDF, 20 image, 16 text and 7 data tools" },
+      { label: "Automated checks", value: "145 passing", note: "91 in-browser checks covering every tool, and 54 unit tests" },
+      { label: "Files sent to a server", value: "none" },
+    ],
+    resultsNote:
+      "The three file results were measured on the live site, using the built-in sample form and generated test files. The checks were run on the release build.",
+    pipeline: [
+      { where: "Page", title: "Read the rules", detail: "Tesseract.js OCR in a worker, with a self-hosted English model whose checksum is pinned" },
+      { where: "Page", title: "Parse", detail: "Lines grouped by subject; format, pixel size and decimal KB limits extracted, units never guessed" },
+      { where: "Applicant", title: "Confirm", detail: "Every value shown beside its source text, editable before anything runs" },
+      { where: "Page", title: "Prepare", detail: "Canvas resize and a JPEG quality search for images; pdf-lib and PDF.js for documents" },
+      { where: "Page", title: "Verify and download", detail: "Size, format and dimensions measured again; ZIP and a check report" },
+    ],
+    decisions: [
+      {
+        title: "Never upload a document",
+        detail:
+          "Portals ask for identity cards, marksheets and signatures, so even the OCR runs in the browser. With no server-side processing the app costs nothing to host and has no store of personal files to leak.",
+      },
+      {
+        title: "Ask, don't guess",
+        detail:
+          "OCR misreads small print, and a wrong limit means a rejected application. The parser leaves a field blank when it is unsure, and the applicant confirms every value against the text it was read from.",
+      },
+      {
+        title: "Change a PDF as little as possible",
+        detail:
+          "A PDF that already fits is passed through untouched. Otherwise it is re-saved losslessly first. Only then are up to 20 pages rebuilt as images, with a warning that text is no longer selectable. Digitally signed PDFs are refused, since compressing them would break the signature.",
+      },
+      {
+        title: "Hit the byte range from both sides",
+        detail:
+          "A 12-step binary search finds the highest JPEG quality under the maximum. When a portal also sets a minimum, the JPEG file is padded to reach it, so the image itself does not change.",
+      },
+    ],
+    shots: [
+      { src: "/img/formfino-result.webp", alt: "FormFino review step listing the three prepared files with their sizes", w: 900, h: 871, caption: "Review and download: every file re-measured against the confirmed rules." },
+      { src: "/img/formfino-phone.webp", alt: "FormFino on a phone", w: 600, h: 1298, caption: "On a phone, where most applicants fill these forms." },
+    ],
+    stack: [
+      { area: "Documents", items: "pdf-lib to build, merge, compress and fill PDFs; PDF.js to render pages; AcroForm field editing; JPEG padding for minimum sizes" },
+      { area: "OCR", items: "Tesseract.js in a Web Worker with a self-hosted English model, worker code and fonts" },
+      { area: "Web", items: "Next.js 16, React 19, TypeScript, Tailwind CSS 4, installable web app with a service worker, light and dark themes" },
+      { area: "Data and files", items: "fflate for ZIP files, Papa Parse for CSV, bounded file, page, pixel and text limits" },
+    ],
+    quality: [
+      "91 in-browser checks run all 69 tools, regression cases and the full prepare-files workflow",
+      "54 unit tests for requirement parsing, limits, file validation, PDF form round trips and analytics privacy",
+      "Per-request CSP nonces, security headers and rejection of unsupported write methods",
+      "GitHub Actions runs the tests, a production build and a dependency audit on every push",
+    ],
   },
 ];

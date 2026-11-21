@@ -32,6 +32,7 @@ test("home page shows the essentials", async ({ page }) => {
   }
   await expect(page.getByRole("link", { name: /LeafCheckup/ }).first()).toBeAttached();
   await expect(page.getByRole("link", { name: /TinyMotion/ }).first()).toBeAttached();
+  await expect(page.getByRole("link", { name: /FormFino/ }).first()).toBeAttached();
   // no GitHub links, by request
   expect(await page.locator('a[href*="github.com"]').count()).toBe(0);
 });

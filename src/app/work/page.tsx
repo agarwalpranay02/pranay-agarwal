@@ -7,7 +7,7 @@ import { CASE_STUDIES, PRODUCTS, type CaseStudy, type Product } from "@/lib/cont
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Case studies of LeafCheckup and TinyMotion: the problem, the pipeline, the engineering decisions and the measured results.",
+    "Case studies of LeafCheckup, TinyMotion and FormFino: the problem, the pipeline, the engineering decisions and the measured results.",
   alternates: { canonical: "/work" },
 };
 
@@ -121,9 +121,11 @@ function Study({ product, study }: { product: Product; study: CaseStudy }) {
         ))}
       </ul>
 
-      <p className="muted mt-10 border-t border-[var(--line)] pt-5 text-[0.9375rem]">
-        {study.research} <Link className="link" href="/#research">Papers and datasets</Link>
-      </p>
+      {study.research && (
+        <p className="muted mt-10 border-t border-[var(--line)] pt-5 text-[0.9375rem]">
+          {study.research} <Link className="link" href="/#research">Papers and datasets</Link>
+        </p>
+      )}
     </article>
   );
 }
@@ -134,7 +136,7 @@ export default function WorkPage() {
       <header className="frame pad pt-14 sm:pt-16">
         <h1 className="text-[2.4rem] leading-[1.05] font-[720] tracking-[-0.035em] sm:text-[3rem]">Work</h1>
         <p className="lead mt-4 max-w-[60ch]">
-          Two AI products I designed, trained and shipped end to end. Each one started as a research paper and became something anyone can open on a phone.
+          Three products I designed and shipped end to end. Two began as research papers; all three run on the phone of whoever opens them.
         </p>
         <nav aria-label="Case studies" className="mt-7 flex flex-wrap gap-2.5">
           {PRODUCTS.map((p) => (

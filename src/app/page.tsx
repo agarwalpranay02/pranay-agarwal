@@ -56,7 +56,7 @@ function Hero() {
         </div>
       </div>
       <p className="lead mt-8 max-w-[62ch]">
-        {PERSON.summary} Two of them are live products. The research behind them is published by Springer, and the field device I co-designed is a registered design with the Government of India.
+        {PERSON.summary} Three of my products are live. The research behind two of them is published by Springer, and the field device I co-designed is a registered design with the Government of India.
       </p>
       <div className="no-print mt-7 flex flex-wrap gap-2.5">
         <a className="btn btn-primary" href={`mailto:${PERSON.email}`}><MailIcon /> Email me</a>

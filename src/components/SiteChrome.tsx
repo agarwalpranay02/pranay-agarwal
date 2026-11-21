@@ -5,7 +5,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 const COMMANDS: Command[] = [
   { id: "home", group: "Pages", label: "Home", href: "/", keywords: "overview start" },
-  { id: "work", group: "Pages", label: "Work: case studies", href: "/work", keywords: "projects leafcheckup tinymotion architecture" },
+  { id: "work", group: "Pages", label: "Work: case studies", href: "/work", keywords: "projects leafcheckup tinymotion formfino architecture" },
   { id: "resume", group: "Pages", label: "Résumé", href: "/resume", keywords: "cv resume pdf" },
   { id: "s-products", group: "Sections", label: "Products", href: "/#products", keywords: "projects apps" },
   { id: "s-experience", group: "Sections", label: "Experience", href: "/#experience", keywords: "work job maxbrain starlight" },
