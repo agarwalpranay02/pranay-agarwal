@@ -62,6 +62,22 @@ export const PRODUCTS: Product[] = [
     stack: ["PyTorch", "timm", "ONNX Runtime Web", "WebAssembly", "Next.js", "FastAPI", "PostgreSQL", "Docker"],
   },
   {
+    slug: "augleak",
+    name: "AugLeak",
+    tagline: "Finds the test images an image model has already seen in training",
+    url: "https://augleak.vercel.app",
+    image: "/img/augleak.webp",
+    imageAlt: "AugLeak home page replaying an audit of the Fruits-360 split",
+    summary:
+      "Many image datasets ship every photo with flipped, rotated and filtered copies, so a random split puts copies of test images into training and the test score measures memory. AugLeak finds those copies from the pixels alone, at a false-link rate the user chooses, entirely in the browser. It comes with a pair inspector, a registry of audited public datasets and a developer API.",
+    metrics: [
+      { value: "98.2% → 73.6%", label: "reported vs fresh-photo accuracy" },
+      { value: "51%", label: "of a public brain-MRI test set found in training" },
+      { value: "29 / 75", label: "same images flagged as the Python reference" },
+    ],
+    stack: ["Python", "NumPy", "SciPy", "PyTorch", "TypeScript", "Web Workers", "Next.js", "PostgreSQL"],
+  },
+  {
     slug: "tinymotion",
     name: "TinyMotion",
     tagline: "Human activity recognition from phone motion sensors",
@@ -92,22 +108,6 @@ export const PRODUCTS: Product[] = [
       { value: "69", label: "file tools, none upload your files" },
     ],
     stack: ["Next.js", "React", "TypeScript", "pdf-lib", "PDF.js", "Tesseract.js", "fflate", "Vercel"],
-  },
-  {
-    slug: "augleak",
-    name: "AugLeak",
-    tagline: "Finds the test images an image model has already seen in training",
-    url: "https://augleak.vercel.app",
-    image: "/img/augleak.webp",
-    imageAlt: "AugLeak home page replaying an audit of the Fruits-360 split",
-    summary:
-      "Many image datasets ship every photo with flipped, rotated and filtered copies, so a random split puts copies of test images into training and the test score measures memory. AugLeak finds those copies from the pixels alone, at a false-link rate the user chooses, entirely in the browser. It comes with a pair inspector, a registry of audited public datasets and a developer API.",
-    metrics: [
-      { value: "98.2% → 73.6%", label: "reported vs fresh-photo accuracy" },
-      { value: "51%", label: "of a public brain-MRI test set found in training" },
-      { value: "29 / 75", label: "same images flagged as the Python reference" },
-    ],
-    stack: ["Python", "NumPy", "SciPy", "PyTorch", "TypeScript", "Web Workers", "Next.js", "PostgreSQL"],
   },
 ];
 
@@ -364,6 +364,68 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Built on our MIND 2025 paper (Springer CCIS vol. 2980) and the two public datasets on IEEE DataPort and Mendeley Data.",
   },
   {
+    slug: "augleak",
+    problem:
+      "Many public image datasets are released already augmented: each photo comes with rotated, flipped, recoloured and filtered copies, and nothing in the file list says which files belong together. Split such a release at random and almost every test image has a copy in training, so the reported accuracy measures memory. On a dataset built this way, a fine-tuned MobileNetV3 reported 98.2% and scored 73.6% on fresh photographs.",
+    approach:
+      "AugLeak finds the copies without the creator's metadata. It compares every pair of images under 28 transforms in two pixel views, then turns the scores into p-values with a null model calibrated on matches between classes. The browser version runs in Web Workers on the user's device and reproduces the Python research code exactly.",
+    results: [
+      { label: "MobileNetV3 fine-tuned on a random split, 16 copies per photo", value: "98.2% reported", note: "73.6% on fresh photographs; EfficientNet-B0 98.8% vs 75.0%" },
+      { label: "Finding copies, average precision on a leaf dataset with known groups", value: "0.76", note: "against 0.20 for an ImageNet-embedding baseline" },
+      { label: "Accuracy overstatement left after evaluation", value: "+1.1 points", note: "against +7.7 with a naive random split" },
+      { label: "Brain Tumor MRI (Kaggle), official test set", value: "51% leaked", note: "88 of 394 test images byte-identical to training images" },
+      { label: "PlantDoc, official test set", value: "8.9% compromised", note: "including test images filed in training under another label" },
+      { label: "Browser engine against the Python reference", value: "identical", note: "same 29 of 75 test images flagged on the demo split, in 8 s" },
+    ],
+    resultsNote:
+      "Every number comes from the experiments in the open research code, and one script regenerates every figure, table and number from the saved results.",
+    pipeline: [
+      { where: "Browser", title: "Read", detail: "Folders or ZIP files read in the tab; nothing is uploaded" },
+      { where: "Workers", title: "Two views", detail: "A blurred grey thumbnail in a centred disc and a 64-bit DCT hash, one worker per core" },
+      { where: "Workers", title: "Transform search", detail: "Each test image tried in 28 versions against every training image of its class" },
+      { where: "Workers", title: "Calibrate", detail: "Hubness correction, then a Gumbel null fitted on matches to other classes gives a p-value per pair" },
+      { where: "Page", title: "Report", detail: "Flagged pairs, per-class rates, a clean test list and a group-aware split, as CSV, JSON or Markdown" },
+    ],
+    decisions: [
+      {
+        title: "Calibrate on other classes, not on a threshold",
+        detail:
+          "An edited copy never changes class, so an image's best match in another class is a match to an unrelated image. Fitting those maxima gives a false-link rate the user can set, instead of a similarity cut-off that means something different on every dataset.",
+      },
+      {
+        title: "Port the reference exactly",
+        detail:
+          "The browser engine reproduces Pillow's bilinear resampling, SciPy's filters and rotation, Python's round-half-even crops and float16 rounding. The website and the research code flag the same images, and a parity test checks it on every push.",
+      },
+      {
+        title: "Always link exact copies",
+        detail:
+          "The brain-MRI audit showed that hubness correction can hide verbatim copies inside a class of near-identical scans. Byte-identical files of the same class are now linked unconditionally.",
+      },
+      {
+        title: "Keep datasets on the device",
+        detail:
+          "Datasets are often unreleased or medical, so the audit runs in Web Workers in the user's own browser. There is no upload API, no file storage and no cost per audit.",
+      },
+    ],
+    shots: [
+      { src: "/img/augleak-result.webp", alt: "AugLeak audit result: 29 of 75 test images have a copy in training, by class", w: 900, h: 562, caption: "An audit of the Fruits-360 split: every flagged pair, with its p-value and the transform that matched." },
+      { src: "/img/augleak-phone.webp", alt: "AugLeak audit result on a phone", w: 600, h: 1298, caption: "The same audit on a phone." },
+    ],
+    stack: [
+      { area: "Detection", items: "Structure and perceptual-hash views, a 28-transform search, hubness correction, a label-calibrated Gumbel null and Bonferroni combination" },
+      { area: "Research code", items: "Python, NumPy, SciPy, Pillow, PyTorch and timm baselines, scikit-learn, Matplotlib" },
+      { area: "In the browser", items: "TypeScript engine in module Web Workers, createImageBitmap and OffscreenCanvas decoding, JSZip, IndexedDB, an offline service worker" },
+      { area: "Web and API", items: "Next.js 16, React 19, Tailwind CSS 4, sharp, better-auth, Drizzle ORM and PostgreSQL, hashed API keys with quotas" },
+    ],
+    quality: [
+      "Parity tests compare features, scores, p-values and flagged images with fixtures made by the Python code",
+      "Playwright end-to-end tests on desktop and mobile cover every page, the demo audit and the API",
+      "Per-request CSP nonces, security headers, hashed and peppered API keys",
+      "GitHub Actions runs lint, type-checks, tests, a production build, CodeQL, gitleaks and dependency audits",
+    ],
+  },
+  {
     slug: "tinymotion",
     problem:
       "Activity recognition usually means streaming sensor data to a server. I wanted a model small enough for a microcontroller that still works when a real person carries a phone at whatever angle it happens to sit in their pocket.",
@@ -486,68 +548,6 @@ export const CASE_STUDIES: CaseStudy[] = [
       "54 unit tests for requirement parsing, limits, file validation, PDF form round trips and analytics privacy",
       "Per-request CSP nonces, security headers and rejection of unsupported write methods",
       "GitHub Actions runs the tests, a production build and a dependency audit on every push",
-    ],
-  },
-  {
-    slug: "augleak",
-    problem:
-      "Many public image datasets are released already augmented: each photo comes with rotated, flipped, recoloured and filtered copies, and nothing in the file list says which files belong together. Split such a release at random and almost every test image has a copy in training, so the reported accuracy measures memory. On a dataset built this way, a fine-tuned MobileNetV3 reported 98.2% and scored 73.6% on fresh photographs.",
-    approach:
-      "AugLeak finds the copies without the creator's metadata. It compares every pair of images under 28 transforms in two pixel views, then turns the scores into p-values with a null model calibrated on matches between classes. The browser version runs in Web Workers on the user's device and reproduces the Python research code exactly.",
-    results: [
-      { label: "MobileNetV3 fine-tuned on a random split, 16 copies per photo", value: "98.2% reported", note: "73.6% on fresh photographs; EfficientNet-B0 98.8% vs 75.0%" },
-      { label: "Finding copies, average precision on a leaf dataset with known groups", value: "0.76", note: "against 0.20 for an ImageNet-embedding baseline" },
-      { label: "Accuracy overstatement left after evaluation", value: "+1.1 points", note: "against +7.7 with a naive random split" },
-      { label: "Brain Tumor MRI (Kaggle), official test set", value: "51% leaked", note: "88 of 394 test images byte-identical to training images" },
-      { label: "PlantDoc, official test set", value: "8.9% compromised", note: "including test images filed in training under another label" },
-      { label: "Browser engine against the Python reference", value: "identical", note: "same 29 of 75 test images flagged on the demo split, in 8 s" },
-    ],
-    resultsNote:
-      "Every number comes from the experiments in the open research code, and one script regenerates every figure, table and number from the saved results.",
-    pipeline: [
-      { where: "Browser", title: "Read", detail: "Folders or ZIP files read in the tab; nothing is uploaded" },
-      { where: "Workers", title: "Two views", detail: "A blurred grey thumbnail in a centred disc and a 64-bit DCT hash, one worker per core" },
-      { where: "Workers", title: "Transform search", detail: "Each test image tried in 28 versions against every training image of its class" },
-      { where: "Workers", title: "Calibrate", detail: "Hubness correction, then a Gumbel null fitted on matches to other classes gives a p-value per pair" },
-      { where: "Page", title: "Report", detail: "Flagged pairs, per-class rates, a clean test list and a group-aware split, as CSV, JSON or Markdown" },
-    ],
-    decisions: [
-      {
-        title: "Calibrate on other classes, not on a threshold",
-        detail:
-          "An edited copy never changes class, so an image's best match in another class is a match to an unrelated image. Fitting those maxima gives a false-link rate the user can set, instead of a similarity cut-off that means something different on every dataset.",
-      },
-      {
-        title: "Port the reference exactly",
-        detail:
-          "The browser engine reproduces Pillow's bilinear resampling, SciPy's filters and rotation, Python's round-half-even crops and float16 rounding. The website and the research code flag the same images, and a parity test checks it on every push.",
-      },
-      {
-        title: "Always link exact copies",
-        detail:
-          "The brain-MRI audit showed that hubness correction can hide verbatim copies inside a class of near-identical scans. Byte-identical files of the same class are now linked unconditionally.",
-      },
-      {
-        title: "Keep datasets on the device",
-        detail:
-          "Datasets are often unreleased or medical, so the audit runs in Web Workers in the user's own browser. There is no upload API, no file storage and no cost per audit.",
-      },
-    ],
-    shots: [
-      { src: "/img/augleak-result.webp", alt: "AugLeak audit result: 29 of 75 test images have a copy in training, by class", w: 900, h: 562, caption: "An audit of the Fruits-360 split: every flagged pair, with its p-value and the transform that matched." },
-      { src: "/img/augleak-phone.webp", alt: "AugLeak audit result on a phone", w: 600, h: 1298, caption: "The same audit on a phone." },
-    ],
-    stack: [
-      { area: "Detection", items: "Structure and perceptual-hash views, a 28-transform search, hubness correction, a label-calibrated Gumbel null and Bonferroni combination" },
-      { area: "Research code", items: "Python, NumPy, SciPy, Pillow, PyTorch and timm baselines, scikit-learn, Matplotlib" },
-      { area: "In the browser", items: "TypeScript engine in module Web Workers, createImageBitmap and OffscreenCanvas decoding, JSZip, IndexedDB, an offline service worker" },
-      { area: "Web and API", items: "Next.js 16, React 19, Tailwind CSS 4, sharp, better-auth, Drizzle ORM and PostgreSQL, hashed API keys with quotas" },
-    ],
-    quality: [
-      "Parity tests compare features, scores, p-values and flagged images with fixtures made by the Python code",
-      "Playwright end-to-end tests on desktop and mobile cover every page, the demo audit and the API",
-      "Per-request CSP nonces, security headers, hashed and peppered API keys",
-      "GitHub Actions runs lint, type-checks, tests, a production build, CodeQL, gitleaks and dependency audits",
     ],
   },
 ];

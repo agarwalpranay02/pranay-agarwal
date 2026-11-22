@@ -120,11 +120,11 @@
         \resumeItem{Runs \textbf{fully in the browser} (ONNX Runtime Web, WebAssembly, WebGPU) at \textbf{$\sim$120 ms/photo}; offline-ready PWA.}
         \resumeItem{\textbf{Out-of-distribution detector (0.993 AUROC)}, calibrated confidence (\textbf{ECE 1.8\%}), heatmaps, developer \textbf{API}.}
       \resumeItemListEnd
-    \resumeProjectHeading{\textbf{TinyMotion} $|$ \emph{TensorFlow, TFLite Micro, C99, TypeScript, Next.js}}{\href{https://tinymotion.vercel.app}{\underline{Live}} $|$ \href{https://github.com/agarwalpranay02/tinymotion}{\underline{Code}}}
+    \resumeProjectHeading{\textbf{AugLeak} $|$ \emph{Python, SciPy, PyTorch, TypeScript, Web Workers, Next.js}}{\href{https://augleak.vercel.app}{\underline{Live}} $|$ \href{https://github.com/agarwalpranay02/augleak}{\underline{Code}}}
       \resumeItemListStart
-        \resumeItem{\textbf{35,558-parameter} residual 1D CNN: \textbf{93.4 $\pm$ 1.1\%} on 9 unseen people (UCI HAR, 5 seeds), live in the browser.}
-        \resumeItem{\textbf{Rotation augmentation} keeps \textbf{92.8\%} with the phone at any angle, where the paper's model falls to 80.3\%.}
-        \resumeItem{Exported to \textbf{INT8 TFLite (85.7 KB)}, TFLite Micro and a dependency-free \textbf{C99 header}, all verified against Keras.}
+        \resumeItem{\textbf{Leakage audit}: finds augmented copies across train/test splits from pixels alone, with calibrated \textbf{p-values}.}
+        \resumeItem{A model at \textbf{98.2\%} on a leaky random split scores \textbf{73.6\%} on fresh photos; \textbf{51\%} of a brain-MRI test set leaked.}
+        \resumeItem{Runs \textbf{fully in the browser} (Web Workers) and matches the Python reference exactly (\textbf{same 29/75 flags}).}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 

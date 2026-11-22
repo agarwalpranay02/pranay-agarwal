@@ -94,16 +94,16 @@ export const RESUME = {
       ],
     },
     {
-      name: "TinyMotion",
-      tech: "TensorFlow, TFLite Micro, C99, TypeScript, Next.js",
+      name: "AugLeak",
+      tech: "Python, SciPy, PyTorch, TypeScript, Web Workers, Next.js",
       links: [
-        { label: "Live", url: "https://tinymotion.vercel.app" },
-        { label: "Code", url: "https://github.com/agarwalpranay02/tinymotion" },
+        { label: "Live", url: "https://augleak.vercel.app" },
+        { label: "Code", url: "https://github.com/agarwalpranay02/augleak" },
       ],
       bullets: [
-        "**35,558-parameter** residual 1D CNN: **93.4 ± 1.1%** on 9 unseen people (UCI HAR, 5 seeds), live in the browser.",
-        "**Rotation augmentation** keeps **92.8%** with the phone at any angle, where the paper's model falls to 80.3%.",
-        "Exported to **INT8 TFLite (85.7 KB)**, TFLite Micro and a dependency-free **C99 header**, all verified against Keras.",
+        "**Leakage audit**: finds augmented copies across train/test splits from pixels alone, with calibrated **p-values**.",
+        "A model at **98.2%** on a leaky random split scores **73.6%** on fresh photos; **51%** of a brain-MRI test set leaked.",
+        "Runs **fully in the browser** (Web Workers) and matches the Python reference exactly (**same 29/75 flags**).",
       ],
     },
   ] as Project[],
