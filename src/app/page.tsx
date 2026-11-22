@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { DetectLabel } from "@/components/DetectLabel";
 import { Rich } from "@/components/Rich";
-import { ArrowUpRight, DocIcon, LinkedInIcon, MailIcon, OrcidIcon, PinIcon, ScholarIcon } from "@/components/Icons";
+import { ArrowUpRight, DocIcon, GitHubIcon, LinkedInIcon, MailIcon, OrcidIcon, PinIcon, ScholarIcon } from "@/components/Icons";
 import {
   BEYOND, CERTIFICATIONS, DATASETS, DESIGN_REGISTRATION, EDUCATION, PAPERS, PERSON, PRODUCTS, RECOGNITION, SCHOOLING,
 } from "@/lib/content";
@@ -56,7 +56,7 @@ function Hero() {
         </div>
       </div>
       <p className="lead mt-8 max-w-[62ch]">
-        {PERSON.summary} Three of my products are live. The research behind two of them is published by Springer, and the field device I co-designed is a registered design with the Government of India.
+        {PERSON.summary} Four of my products are live. The research behind two of them is published by Springer, and the field device I co-designed is a registered design with the Government of India.
       </p>
       <div className="no-print mt-7 flex flex-wrap gap-2.5">
         <a className="btn btn-primary" href={`mailto:${PERSON.email}`}><MailIcon /> Email me</a>
@@ -64,6 +64,7 @@ function Hero() {
         <a className="btn" href={PERSON.links.linkedin} target="_blank" rel="noopener noreferrer"><LinkedInIcon /> LinkedIn</a>
         <a className="btn" href={PERSON.links.scholar} target="_blank" rel="noopener noreferrer"><ScholarIcon /> Scholar</a>
         <a className="btn" href={PERSON.links.orcid} target="_blank" rel="noopener noreferrer"><OrcidIcon /> ORCID</a>
+        <a className="btn" href={PERSON.links.github} target="_blank" rel="noopener noreferrer"><GitHubIcon /> GitHub</a>
       </div>
     </section>
   );
@@ -107,7 +108,7 @@ function Products() {
   );
 }
 
-/** The site carries no GitHub links (by request); the résumé keeps its code links. */
+/** Experience entries drop the inline code links that the résumé carries. */
 const withoutGitHub = (t: string) => t.replace(/\s*\(\[code\]\(https:\/\/github\.com[^)]*\)\)/g, "");
 
 function Experience() {

@@ -38,7 +38,7 @@ const JSON_LD = {
   email: `mailto:${PERSON.email}`,
   url: SITE.url,
   image: `${SITE.url}/img/pranay.webp`,
-  sameAs: [PERSON.links.linkedin, PERSON.links.scholar, PERSON.links.orcid],
+  sameAs: [PERSON.links.linkedin, PERSON.links.scholar, PERSON.links.orcid, PERSON.links.github],
   knowsAbout: ["Computer vision", "Deep learning", "TinyML", "On-device machine learning", "Plant disease detection", "Human activity recognition"],
   subjectOf: [
     ...PAPERS.filter((p) => p.doi).map((p) => ({ "@type": "ScholarlyArticle", headline: p.title, sameAs: `https://doi.org/${p.doi}` })),
